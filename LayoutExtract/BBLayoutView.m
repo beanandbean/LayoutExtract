@@ -22,6 +22,8 @@
 @property (strong, nonatomic) NSMutableDictionary *layoutViews;
 @property (strong, nonatomic) NSMutableDictionary *layoutConstraints;
 
+@property (nonatomic) CGFloat cornerRadius;
+
 @end
 
 @implementation BBLayoutView
@@ -38,7 +40,7 @@
     } else {
         name = nib;
     }
-    self = [[NSBundle mainBundle] loadNibNamed:name owner:Nil options:nil].firstObject;
+    self = [[NSBundle mainBundle] loadNibNamed:name owner:nil options:nil].firstObject;
     if (self) {
         [self extractPositions];
     }
@@ -97,7 +99,7 @@
                 for (BBLayoutConstraintGenerator *generator in [self.layoutConstraints objectForKey:tag]) {
                     NSLayoutConstraint *destroyed = generator.destroyed;
                     if ([self.constraints containsObject:destroyed]) {
-                        [self removeConstraint:generator.destroyed];
+                        [self removeConstraint:destroyed];;
                     }
                 }
             }

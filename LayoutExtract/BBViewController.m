@@ -21,8 +21,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-    [self initializeLayoutViewForLayout:@"Layout24"];
-    self.segmentedControl.selectedSegmentIndex = 1;
+    [self initializeLayoutViewForLayout:@"Layout18"];
+    self.segmentedControl.selectedSegmentIndex = 0;
 }
 
 - (void)initializeLayoutViewForLayout:(NSString *)layout {
@@ -46,12 +46,45 @@
 - (UIView *)layoutView:(BBLayoutView *)layoutView viewForPositionTagged:(NSInteger)tag {
     UIView *view = [[UIView alloc] init];
     view.backgroundColor = [UIColor colorWithHue:1.0 / 8 * tag saturation:1.0 brightness:1.0 alpha:1.0];
+    /*switch (self.segmentedControl.selectedSegmentIndex) {
+        case 0:
+            view.layer.cornerRadius = 5;
+            break;
+            
+        case 1:
+            view.layer.cornerRadius = 15;
+            break;
+            
+        case 2:
+            view.layer.cornerRadius = 35;
+            break;
+            
+        default:
+            break;
+    }*/
     return view;
 }
 
 - (IBAction)segmentedControlValueChanged:(id)sender {
     [self.layoutView removeFromSuperview];
-    [self initializeLayoutViewForLayout:self.segmentedControl.selectedSegmentIndex ? @"Layout24" : @"Layout18"];
+    NSString *nib;
+    switch (self.segmentedControl.selectedSegmentIndex) {
+        case 0:
+            nib = @"Layout18";
+            break;
+            
+        case 1:
+            nib = @"Layout24";
+            break;
+            
+        case 2:
+            nib = @"Layout33";
+            break;
+            
+        default:
+            return;
+    }
+    [self initializeLayoutViewForLayout:nib];
 }
 
 @end
