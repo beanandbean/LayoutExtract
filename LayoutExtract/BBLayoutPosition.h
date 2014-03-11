@@ -1,13 +1,13 @@
 //
-//  BBViewController.h
+//  BBLayoutPosition.h
 //  LayoutExtract
 //
 //  Created by Wang Shuwei on 3/11/14.
 //  Copyright (c) 2014 Bean & Bean. All rights reserved.
 //
 
-#import "BBLayoutView.h"
+@interface BBLayoutPosition : UIView
 
-@interface BBViewController : UIViewController <BBLayoutViewDataSource>
++ (BBLayoutPosition *)layoutPositionNull;
 
 @end
