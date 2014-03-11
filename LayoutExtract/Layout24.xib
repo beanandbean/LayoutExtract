@@ -91,7 +91,7 @@
                 <constraint firstItem="RBK-IF-Ybt" firstAttribute="leading" secondItem="z38-Ld-edC" secondAttribute="trailing" constant="8" id="zxF-YD-Yym"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
 </document>

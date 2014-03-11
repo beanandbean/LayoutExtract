@@ -87,7 +87,7 @@
                 <constraint firstItem="dHI-ny-buy" firstAttribute="height" secondItem="0C7-Vm-nPV" secondAttribute="height" id="zW0-9E-96w"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
 </document>
