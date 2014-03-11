@@ -25,6 +25,7 @@
 }
 
 - (NSLayoutConstraint *)generated {
+    NSAssert([self.positionDictionary objectForKey:self.tag], @"");
     if (!self.generatedConstraint) {
         self.generatedConstraint = [NSLayoutConstraint constraintWithItem:[self.positionDictionary objectForKey:self.tag] attribute:self.attr1 relatedBy:self.relation toItem:self.item2 attribute:self.attr2 multiplier:self.mul constant:self.cons];
         self.generatedConstraint.priority = self.priority;

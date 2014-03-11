@@ -8,27 +8,34 @@
 
 #import "BBViewController.h"
 
+@interface BBViewController ()
+
+@property (strong, nonatomic) BBLayoutView *layoutView;
+
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+
+@end
+
 @implementation BBViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-    BBLayoutView *view = [[BBLayoutView alloc] initWithNibNamed:@"TestLayout"];
-    view.dataSource = self;
-    view.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.view addSubview:view];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0.0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0.0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0 constant:0.0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0]];
-    
-    // Method 1
-    UIView *subview = [[UIView alloc] init];
-    subview.backgroundColor = [UIColor redColor];
-    [view replacePositionTagged:0 withView:subview];
-    
-    // Method 2
-    [view reloadData];
+    [self initializeLayoutViewForLayout:@"Layout24"];
+    self.segmentedControl.selectedSegmentIndex = 1;
+}
+
+- (void)initializeLayoutViewForLayout:(NSString *)layout {
+    self.layoutView = [[BBLayoutView alloc] initWithNibNamed:layout];
+    self.layoutView.dataSource = self;
+    self.layoutView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:self.layoutView];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.layoutView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.segmentedControl attribute:NSLayoutAttributeBottom multiplier:1.0 constant:8.0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.layoutView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.layoutView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0.0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.layoutView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0.0]];
+   
+    [self.layoutView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,8 +45,13 @@
 
 - (UIView *)layoutView:(BBLayoutView *)layoutView viewForPositionTagged:(NSInteger)tag {
     UIView *view = [[UIView alloc] init];
-    view.backgroundColor = [UIColor greenColor];
+    view.backgroundColor = [UIColor colorWithHue:1.0 / 8 * tag saturation:1.0 brightness:1.0 alpha:1.0];
     return view;
+}
+
+- (IBAction)segmentedControlValueChanged:(id)sender {
+    [self.layoutView removeFromSuperview];
+    [self initializeLayoutViewForLayout:self.segmentedControl.selectedSegmentIndex ? @"Layout24" : @"Layout18"];
 }
 
 @end

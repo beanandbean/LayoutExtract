@@ -27,70 +27,101 @@
 @implementation BBLayoutView
 
 - (id)initWithNibNamed:(NSString *)nib {
-    self = [[NSBundle mainBundle] loadNibNamed:nib owner:Nil options:nil].firstObject;
-    NSMutableSet *layoutPos = [NSMutableSet set];
+    self = [self initWithNibNamed:nib platformSpecified:NO];
+    return self;
+}
+
+- (id)initWithNibNamed:(NSString *)nib platformSpecified:(BOOL)specified {
+    NSString *name;
+    if (specified) {
+        name = [NSString stringWithFormat:@"%@@%@", name, UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ? @"iphone" : @"ipad"];
+    } else {
+        name = nib;
+    }
+    self = [[NSBundle mainBundle] loadNibNamed:name owner:Nil options:nil].firstObject;
     if (self) {
-        for (UIView *view in self.subviews) {
-            if (view.class == [BBLayoutPosition class]) {
-                [self.layoutViews setObject:[BBLayoutPosition layoutPositionNull] forKey:TAG(view)];
-                [self.layoutConstraints setObject:[NSMutableArray array] forKey:TAG(view)];
-                [layoutPos addObject:view];
-            }
-        }
-        for (NSLayoutConstraint *constraint in self.constraints) {
-            if ([layoutPos containsObject:constraint.firstItem] && [layoutPos containsObject:constraint.secondItem]) {
-                BBLayoutConstraintGeneratorBoth *generator = [[BBLayoutConstraintGeneratorBoth alloc] initWithPositionDictionary:self.layoutViews andConstraint:constraint];
-                [((NSMutableArray *)[self.layoutConstraints objectForKey:TAG(constraint.firstItem)]) addObject:generator];
-                [((NSMutableArray *)[self.layoutConstraints objectForKey:TAG(constraint.secondItem)]) addObject:generator];
-            } else if ([layoutPos containsObject:constraint.firstItem]) {
-                BBLayoutConstraintGeneratorFirst *generator = [[BBLayoutConstraintGeneratorFirst alloc] initWithPositionDictionary:self.layoutViews andConstraint:constraint];
-                [((NSMutableArray *)[self.layoutConstraints objectForKey:TAG(constraint.firstItem)]) addObject:generator];
-            } else if ([layoutPos containsObject:constraint.secondItem]) {
-                BBLayoutConstraintGeneratorSecond *generator = [[BBLayoutConstraintGeneratorSecond alloc] initWithPositionDictionary:self.layoutViews andConstraint:constraint];
-                [((NSMutableArray *)[self.layoutConstraints objectForKey:TAG(constraint.secondItem)]) addObject:generator];
-            }
-        }
+        [self extractPositions];
     }
     return self;
 }
 
-- (void)replacePositionTagged:(NSInteger)tag withView:(UIView *)view {
-    if (!view) {
-        view = [BBLayoutPosition layoutPositionNull];
+- (void)extractPositions {
+    self.layoutViews = [NSMutableDictionary dictionary];
+    self.layoutConstraints = [NSMutableDictionary dictionary];
+    NSMutableSet *layoutPos = [NSMutableSet set];
+    for (UIView *view in self.subviews) {
+        if (view.class == [BBLayoutPosition class]) {
+            [self.layoutViews setObject:[BBLayoutPosition layoutPositionNull] forKey:TAG(view)];
+            [self.layoutConstraints setObject:[NSMutableArray array] forKey:TAG(view)];
+            [layoutPos addObject:view];
+        }
     }
-    view.translatesAutoresizingMaskIntoConstraints = NO;
-    UIView *old = [self.layoutViews objectForKey:INTNUM(tag)];
-    [self.layoutViews setObject:view forKey:INTNUM(tag)];
-    [self insertSubview:view aboveSubview:old];
-    [old removeFromSuperview];
-    for (BBLayoutConstraintGenerator *generator in [self.layoutConstraints objectForKey:INTNUM(tag)]) {
-        [self removeConstraint:generator.destroyed];
-        [self addConstraint:generator.generated];
-    }
-}
-
-- (void)reloadData {
-    if (self.dataSource) {
-        for (NSNumber *tag in self.layoutViews) {
-            [self replacePositionTagged:tag.integerValue withView:[self.dataSource layoutView:self viewForPositionTagged:tag.integerValue]];
+    for (NSLayoutConstraint *constraint in self.constraints) {
+        if ([layoutPos containsObject:constraint.firstItem] && [layoutPos containsObject:constraint.secondItem]) {
+            BBLayoutConstraintGeneratorBoth *generator = [[BBLayoutConstraintGeneratorBoth alloc] initWithPositionDictionary:self.layoutViews andConstraint:constraint];
+            [((NSMutableArray *)[self.layoutConstraints objectForKey:TAG(constraint.firstItem)]) addObject:generator];
+            [((NSMutableArray *)[self.layoutConstraints objectForKey:TAG(constraint.secondItem)]) addObject:generator];
+        } else if ([layoutPos containsObject:constraint.firstItem]) {
+            BBLayoutConstraintGeneratorFirst *generator = [[BBLayoutConstraintGeneratorFirst alloc] initWithPositionDictionary:self.layoutViews andConstraint:constraint];
+            [((NSMutableArray *)[self.layoutConstraints objectForKey:TAG(constraint.firstItem)]) addObject:generator];
+        } else if ([layoutPos containsObject:constraint.secondItem]) {
+            BBLayoutConstraintGeneratorSecond *generator = [[BBLayoutConstraintGeneratorSecond alloc] initWithPositionDictionary:self.layoutViews andConstraint:constraint];
+            [((NSMutableArray *)[self.layoutConstraints objectForKey:TAG(constraint.secondItem)]) addObject:generator];
         }
     }
 }
 
-#pragma mark - Lazy Init
-
-- (NSMutableDictionary *)layoutViews {
-    if (!_layoutViews) {
-        _layoutViews = [NSMutableDictionary dictionary];
+- (void)replacePositionTagged:(NSInteger)tag withView:(UIView *)view {
+    if (self.layoutViews) {
+        for (BBLayoutConstraintGenerator *generator in [self.layoutConstraints objectForKey:INTNUM(tag)]) {
+            [self removeConstraint:generator.destroyed];
+        }
+        if (!view) {
+            view = [BBLayoutPosition layoutPositionNull];
+        }
+        view.translatesAutoresizingMaskIntoConstraints = NO;
+        UIView *old = [self.layoutViews objectForKey:INTNUM(tag)];
+        [self.layoutViews setObject:view forKey:INTNUM(tag)];
+        [self insertSubview:view aboveSubview:old];
+        [old removeFromSuperview];
+        for (BBLayoutConstraintGenerator *generator in [self.layoutConstraints objectForKey:INTNUM(tag)]) {
+            [self addConstraint:generator.generated];
+        }
     }
-    return _layoutViews;
 }
 
-- (NSMutableDictionary *)layoutConstraints {
-    if (!_layoutConstraints) {
-        _layoutConstraints = [NSMutableDictionary dictionary];
+- (void)reloadData {
+    if (self.layoutViews) {
+        if (self.dataSource) {
+            for (NSNumber *tag in self.layoutConstraints) {
+                for (BBLayoutConstraintGenerator *generator in [self.layoutConstraints objectForKey:tag]) {
+                    NSLayoutConstraint *destroyed = generator.destroyed;
+                    if ([self.constraints containsObject:destroyed]) {
+                        [self removeConstraint:generator.destroyed];
+                    }
+                }
+            }
+            for (NSNumber *tag in self.layoutViews.allKeys) {
+                UIView *view = [self.dataSource layoutView:self viewForPositionTagged:tag.integerValue];
+                if (!view) {
+                    view = [BBLayoutPosition layoutPositionNull];
+                }
+                view.translatesAutoresizingMaskIntoConstraints = NO;
+                UIView *old = [self.layoutViews objectForKey:tag];
+                [self.layoutViews setObject:view forKey:tag];
+                [self insertSubview:view aboveSubview:old];
+                [old removeFromSuperview];
+            }
+            for (NSNumber *tag in self.layoutConstraints) {
+                for (BBLayoutConstraintGenerator *generator in [self.layoutConstraints objectForKey:tag]) {
+                    NSLayoutConstraint *generated = generator.generated;
+                    if (![self.constraints containsObject:generated]) {
+                        [self addConstraint:generated];
+                    }
+                }
+            }
+        }
     }
-    return _layoutConstraints;
 }
 
 @end
