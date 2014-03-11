@@ -13,15 +13,14 @@
 		2C5BC8F718CF15B700712C80 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BC8F518CF15B700712C80 /* InfoPlist.strings */; };
 		2C5BC8F918CF15B700712C80 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BC8F818CF15B700712C80 /* main.m */; };
 		2C5BC8FD18CF15B700712C80 /* BBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BC8FC18CF15B700712C80 /* BBAppDelegate.m */; };
-		2C5BC90018CF15B700712C80 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BC8FE18CF15B700712C80 /* Main_iPhone.storyboard */; };
-		2C5BC90318CF15B700712C80 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BC90118CF15B700712C80 /* Main_iPad.storyboard */; };
+		2C5BC90318CF15B700712C80 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BC90118CF15B700712C80 /* Main.storyboard */; };
 		2C5BC90618CF15B700712C80 /* BBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BC90518CF15B700712C80 /* BBViewController.m */; };
 		2C5BC90818CF15B700712C80 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BC90718CF15B700712C80 /* Images.xcassets */; };
 		2C5BC90F18CF15B700712C80 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5BC90E18CF15B700712C80 /* XCTest.framework */; };
 		2C5BC91018CF15B700712C80 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5BC8EC18CF15B700712C80 /* Foundation.framework */; };
 		2C5BC91118CF15B700712C80 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5BC8F018CF15B700712C80 /* UIKit.framework */; };
-		2C5BC91918CF15B700712C80 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BC91718CF15B700712C80 /* InfoPlist.strings */; };
-		2C5BC91B18CF15B700712C80 /* LayoutExtractTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BC91A18CF15B700712C80 /* LayoutExtractTests.m */; };
+		2C5BC92618CF16C300712C80 /* BBLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BC92518CF16C300712C80 /* BBLayoutView.m */; };
+		2C5BC92818CF172400712C80 /* TestLayout.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BC92718CF172400712C80 /* TestLayout.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,16 +44,15 @@
 		2C5BC8FA18CF15B700712C80 /* LayoutExtract-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LayoutExtract-Prefix.pch"; sourceTree = "<group>"; };
 		2C5BC8FB18CF15B700712C80 /* BBAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BBAppDelegate.h; sourceTree = "<group>"; };
 		2C5BC8FC18CF15B700712C80 /* BBAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BBAppDelegate.m; sourceTree = "<group>"; };
-		2C5BC8FF18CF15B700712C80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		2C5BC90218CF15B700712C80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		2C5BC90218CF15B700712C80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2C5BC90418CF15B700712C80 /* BBViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BBViewController.h; sourceTree = "<group>"; };
 		2C5BC90518CF15B700712C80 /* BBViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BBViewController.m; sourceTree = "<group>"; };
 		2C5BC90718CF15B700712C80 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2C5BC90D18CF15B700712C80 /* LayoutExtractTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LayoutExtractTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5BC90E18CF15B700712C80 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		2C5BC91618CF15B700712C80 /* LayoutExtractTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LayoutExtractTests-Info.plist"; sourceTree = "<group>"; };
-		2C5BC91818CF15B700712C80 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		2C5BC91A18CF15B700712C80 /* LayoutExtractTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LayoutExtractTests.m; sourceTree = "<group>"; };
+		2C5BC92418CF16C300712C80 /* BBLayoutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBLayoutView.h; sourceTree = "<group>"; };
+		2C5BC92518CF16C300712C80 /* BBLayoutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBLayoutView.m; sourceTree = "<group>"; };
+		2C5BC92718CF172400712C80 /* TestLayout.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestLayout.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +83,6 @@
 			isa = PBXGroup;
 			children = (
 				2C5BC8F218CF15B700712C80 /* LayoutExtract */,
-				2C5BC91418CF15B700712C80 /* LayoutExtractTests */,
 				2C5BC8EB18CF15B700712C80 /* Frameworks */,
 				2C5BC8EA18CF15B700712C80 /* Products */,
 			);
@@ -116,12 +113,14 @@
 			children = (
 				2C5BC8FB18CF15B700712C80 /* BBAppDelegate.h */,
 				2C5BC8FC18CF15B700712C80 /* BBAppDelegate.m */,
-				2C5BC8FE18CF15B700712C80 /* Main_iPhone.storyboard */,
-				2C5BC90118CF15B700712C80 /* Main_iPad.storyboard */,
+				2C5BC90118CF15B700712C80 /* Main.storyboard */,
 				2C5BC90418CF15B700712C80 /* BBViewController.h */,
 				2C5BC90518CF15B700712C80 /* BBViewController.m */,
 				2C5BC90718CF15B700712C80 /* Images.xcassets */,
 				2C5BC8F318CF15B700712C80 /* Supporting Files */,
+				2C5BC92418CF16C300712C80 /* BBLayoutView.h */,
+				2C5BC92518CF16C300712C80 /* BBLayoutView.m */,
+				2C5BC92718CF172400712C80 /* TestLayout.xib */,
 			);
 			path = LayoutExtract;
 			sourceTree = "<group>";
@@ -133,24 +132,6 @@
 				2C5BC8F518CF15B700712C80 /* InfoPlist.strings */,
 				2C5BC8F818CF15B700712C80 /* main.m */,
 				2C5BC8FA18CF15B700712C80 /* LayoutExtract-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		2C5BC91418CF15B700712C80 /* LayoutExtractTests */ = {
-			isa = PBXGroup;
-			children = (
-				2C5BC91A18CF15B700712C80 /* LayoutExtractTests.m */,
-				2C5BC91518CF15B700712C80 /* Supporting Files */,
-			);
-			path = LayoutExtractTests;
-			sourceTree = "<group>";
-		};
-		2C5BC91518CF15B700712C80 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				2C5BC91618CF15B700712C80 /* LayoutExtractTests-Info.plist */,
-				2C5BC91718CF15B700712C80 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -232,9 +213,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C5BC90318CF15B700712C80 /* Main_iPad.storyboard in Resources */,
+				2C5BC90318CF15B700712C80 /* Main.storyboard in Resources */,
+				2C5BC92818CF172400712C80 /* TestLayout.xib in Resources */,
 				2C5BC90818CF15B700712C80 /* Images.xcassets in Resources */,
-				2C5BC90018CF15B700712C80 /* Main_iPhone.storyboard in Resources */,
 				2C5BC8F718CF15B700712C80 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -243,7 +224,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C5BC91918CF15B700712C80 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +236,7 @@
 			files = (
 				2C5BC90618CF15B700712C80 /* BBViewController.m in Sources */,
 				2C5BC8FD18CF15B700712C80 /* BBAppDelegate.m in Sources */,
+				2C5BC92618CF16C300712C80 /* BBLayoutView.m in Sources */,
 				2C5BC8F918CF15B700712C80 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -264,7 +245,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C5BC91B18CF15B700712C80 /* LayoutExtractTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,28 +267,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		2C5BC8FE18CF15B700712C80 /* Main_iPhone.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2C5BC8FF18CF15B700712C80 /* Base */,
-			);
-			name = Main_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		2C5BC90118CF15B700712C80 /* Main_iPad.storyboard */ = {
+		2C5BC90118CF15B700712C80 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				2C5BC90218CF15B700712C80 /* Base */,
 			);
-			name = Main_iPad.storyboard;
-			sourceTree = "<group>";
-		};
-		2C5BC91718CF15B700712C80 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2C5BC91818CF15B700712C80 /* en */,
-			);
-			name = InfoPlist.strings;
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

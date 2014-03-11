@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 Bean & Bean. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 @interface BBViewController : UIViewController
 
 @end

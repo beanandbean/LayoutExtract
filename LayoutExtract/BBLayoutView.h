@@ -1,13 +1,13 @@
 //
-//  BBAppDelegate.h
+//  BBLayoutView.h
 //  LayoutExtract
 //
 //  Created by Wang Shuwei on 3/11/14.
 //  Copyright (c) 2014 Bean & Bean. All rights reserved.
 //
 
-@interface BBAppDelegate : UIResponder <UIApplicationDelegate>
+@interface BBLayoutView : UIView
 
-@property (strong, nonatomic) UIWindow *window;
+- (id)initWithNibNamed:(NSString *)nib;
 
 @end
