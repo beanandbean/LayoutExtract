@@ -40,28 +40,11 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (UIView *)layoutView:(BBLayoutView *)layoutView viewForPositionTagged:(NSInteger)tag {
     UIView *view = [[UIView alloc] init];
     view.backgroundColor = [UIColor colorWithHue:1.0 / 8 * tag saturation:1.0 brightness:1.0 alpha:1.0];
-    /*switch (self.segmentedControl.selectedSegmentIndex) {
-        case 0:
-            view.layer.cornerRadius = 5;
-            break;
-            
-        case 1:
-            view.layer.cornerRadius = 15;
-            break;
-            
-        case 2:
-            view.layer.cornerRadius = 35;
-            break;
-            
-        default:
-            break;
-    }*/
     return view;
 }
 

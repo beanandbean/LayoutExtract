@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Bean & Bean. All rights reserved.
 //
 
+#import "BBLSInterpreter.h"
+
 @class BBLayoutView;
 
 @protocol BBLayoutViewDataSource <NSObject>
@@ -14,7 +16,7 @@
 
 @end
 
-@interface BBLayoutView : UIView
+@interface BBLayoutView : UIView <BBLSInterpreterDelegate>
 
 @property (strong, nonatomic) id<BBLayoutViewDataSource> dataSource;
 

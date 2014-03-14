@@ -28,6 +28,10 @@
 		2C5BC94218CF489500712C80 /* BBLayoutConstraintGeneratorBoth.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BC93F18CF489500712C80 /* BBLayoutConstraintGeneratorBoth.m */; };
 		2C5BC94318CF489500712C80 /* BBLayoutConstraintGeneratorSecond.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BC94118CF489500712C80 /* BBLayoutConstraintGeneratorSecond.m */; };
 		2C5BC94518CF496E00712C80 /* Layout33.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BC94418CF496E00712C80 /* Layout33.xib */; };
+		2C65ACEA18D327400082BF61 /* BBLSInterpreter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C65ACE918D327400082BF61 /* BBLSInterpreter.m */; };
+		2C65ACEC18D32C990082BF61 /* Layout18.ls in Resources */ = {isa = PBXBuildFile; fileRef = 2C65ACEB18D32C990082BF61 /* Layout18.ls */; };
+		2C65ACEE18D33F400082BF61 /* Layout24.ls in Resources */ = {isa = PBXBuildFile; fileRef = 2C65ACED18D33F400082BF61 /* Layout24.ls */; };
+		2C65ACF018D33F630082BF61 /* Layout33.ls in Resources */ = {isa = PBXBuildFile; fileRef = 2C65ACEF18D33F630082BF61 /* Layout33.ls */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +76,11 @@
 		2C5BC94018CF489500712C80 /* BBLayoutConstraintGeneratorSecond.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBLayoutConstraintGeneratorSecond.h; sourceTree = "<group>"; };
 		2C5BC94118CF489500712C80 /* BBLayoutConstraintGeneratorSecond.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBLayoutConstraintGeneratorSecond.m; sourceTree = "<group>"; };
 		2C5BC94418CF496E00712C80 /* Layout33.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Layout33.xib; sourceTree = "<group>"; };
+		2C65ACE818D327400082BF61 /* BBLSInterpreter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBLSInterpreter.h; sourceTree = "<group>"; };
+		2C65ACE918D327400082BF61 /* BBLSInterpreter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBLSInterpreter.m; sourceTree = "<group>"; };
+		2C65ACEB18D32C990082BF61 /* Layout18.ls */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Layout18.ls; sourceTree = "<group>"; };
+		2C65ACED18D33F400082BF61 /* Layout24.ls */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Layout24.ls; sourceTree = "<group>"; };
+		2C65ACEF18D33F630082BF61 /* Layout33.ls */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Layout33.ls; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +139,7 @@
 		2C5BC8F218CF15B700712C80 /* LayoutExtract */ = {
 			isa = PBXGroup;
 			children = (
+				2C65ACE718D325230082BF61 /* Layout View */,
 				2C5BC8FB18CF15B700712C80 /* BBAppDelegate.h */,
 				2C5BC8FC18CF15B700712C80 /* BBAppDelegate.m */,
 				2C5BC90118CF15B700712C80 /* Main.storyboard */,
@@ -137,12 +147,7 @@
 				2C5BC90518CF15B700712C80 /* BBViewController.m */,
 				2C5BC90718CF15B700712C80 /* Images.xcassets */,
 				2C5BC8F318CF15B700712C80 /* Supporting Files */,
-				2C5BC92418CF16C300712C80 /* BBLayoutView.h */,
-				2C5BC92518CF16C300712C80 /* BBLayoutView.m */,
 				2C5BC93B18CF44F100712C80 /* Layouts */,
-				2C5BC92918CF1C1C00712C80 /* BBLayoutPosition.h */,
-				2C5BC92A18CF1C1C00712C80 /* BBLayoutPosition.m */,
-				2C5BC93818CF273600712C80 /* Layout Constraint Generator */,
 			);
 			path = LayoutExtract;
 			sourceTree = "<group>";
@@ -179,8 +184,25 @@
 				2C5BC93C18CF488B00712C80 /* Layout18.xib */,
 				2C5BC92718CF172400712C80 /* Layout24.xib */,
 				2C5BC94418CF496E00712C80 /* Layout33.xib */,
+				2C65ACEB18D32C990082BF61 /* Layout18.ls */,
+				2C65ACED18D33F400082BF61 /* Layout24.ls */,
+				2C65ACEF18D33F630082BF61 /* Layout33.ls */,
 			);
 			name = Layouts;
+			sourceTree = "<group>";
+		};
+		2C65ACE718D325230082BF61 /* Layout View */ = {
+			isa = PBXGroup;
+			children = (
+				2C5BC92418CF16C300712C80 /* BBLayoutView.h */,
+				2C5BC92518CF16C300712C80 /* BBLayoutView.m */,
+				2C5BC92918CF1C1C00712C80 /* BBLayoutPosition.h */,
+				2C5BC92A18CF1C1C00712C80 /* BBLayoutPosition.m */,
+				2C5BC93818CF273600712C80 /* Layout Constraint Generator */,
+				2C65ACE818D327400082BF61 /* BBLSInterpreter.h */,
+				2C65ACE918D327400082BF61 /* BBLSInterpreter.m */,
+			);
+			name = "Layout View";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,8 +283,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C5BC90318CF15B700712C80 /* Main.storyboard in Resources */,
+				2C65ACF018D33F630082BF61 /* Layout33.ls in Resources */,
+				2C65ACEC18D32C990082BF61 /* Layout18.ls in Resources */,
 				2C5BC94518CF496E00712C80 /* Layout33.xib in Resources */,
 				2C5BC92818CF172400712C80 /* Layout24.xib in Resources */,
+				2C65ACEE18D33F400082BF61 /* Layout24.ls in Resources */,
 				2C5BC90818CF15B700712C80 /* Images.xcassets in Resources */,
 				2C5BC93D18CF488B00712C80 /* Layout18.xib in Resources */,
 				2C5BC8F718CF15B700712C80 /* InfoPlist.strings in Resources */,
@@ -284,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C5BC92B18CF1C1C00712C80 /* BBLayoutPosition.m in Sources */,
+				2C65ACEA18D327400082BF61 /* BBLSInterpreter.m in Sources */,
 				2C5BC90618CF15B700712C80 /* BBViewController.m in Sources */,
 				2C5BC8FD18CF15B700712C80 /* BBAppDelegate.m in Sources */,
 				2C5BC94218CF489500712C80 /* BBLayoutConstraintGeneratorBoth.m in Sources */,
@@ -493,6 +519,7 @@
 				2C5BC92018CF15B700712C80 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2C5BC92118CF15B700712C80 /* Build configuration list for PBXNativeTarget "LayoutExtractTests" */ = {
 			isa = XCConfigurationList;
@@ -501,6 +528,7 @@
 				2C5BC92318CF15B700712C80 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
