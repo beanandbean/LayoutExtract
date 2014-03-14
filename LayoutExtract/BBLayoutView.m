@@ -31,14 +31,11 @@
 @implementation BBLayoutView
 
 - (id)initWithNibNamed:(NSString *)nib {
-    self = [self initWithNibNamed:nib platformSpecified:NO];
-    return self;
-}
-
-- (id)initWithNibNamed:(NSString *)nib platformSpecified:(BOOL)specified {
+    NSString *specified = [NSString stringWithFormat:@"%@@%@", nib, UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ? @"iphone" : @"ipad"];
+    NSString *nibPath = [[NSBundle mainBundle] pathForResource:specified ofType:@"xib"];
     NSString *name;
-    if (specified) {
-        name = [NSString stringWithFormat:@"%@@%@", name, UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ? @"iphone" : @"ipad"];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:nibPath]) {
+        name = specified;
     } else {
         name = nib;
     }
@@ -49,7 +46,10 @@
         self.layoutConstraints = [NSMutableDictionary dictionary];
         self.layoutCornerRadii = [NSMutableDictionary dictionary];
         [self extractPositions];
-        NSString *scriptPath = [[NSBundle mainBundle] pathForResource:name ofType:@"ls"];
+        NSString *scriptPath = [[NSBundle mainBundle] pathForResource:specified ofType:@"ls"];
+        if (![[NSFileManager defaultManager] fileExistsAtPath:scriptPath]) {
+            scriptPath = [[NSBundle mainBundle] pathForResource:nib ofType:@"ls"];
+        }
         if ([[NSFileManager defaultManager] fileExistsAtPath:scriptPath]) {
             NSString *data = [NSString stringWithContentsOfFile:scriptPath usedEncoding:nil error:nil];
             [[[BBLSInterpreter alloc] initWithDelegate:self] feed:data];

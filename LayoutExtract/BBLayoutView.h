@@ -21,7 +21,6 @@
 @property (strong, nonatomic) id<BBLayoutViewDataSource> dataSource;
 
 - (id)initWithNibNamed:(NSString *)nib;
-- (id)initWithNibNamed:(NSString *)nib platformSpecified:(BOOL)specified;
 
 - (void)extractPositions;
 
