@@ -81,6 +81,7 @@
         if (!view) {
             view = [BBLayoutPosition layoutPositionNull];
         }
+        view.tag = tag;
         view.translatesAutoresizingMaskIntoConstraints = NO;
         UIView *old = [self.layoutViews objectForKey:INTNUM(tag)];
         [self.layoutViews setObject:view forKey:INTNUM(tag)];
@@ -108,6 +109,7 @@
                 if (!view) {
                     view = [BBLayoutPosition layoutPositionNull];
                 }
+                view.tag = tag.integerValue;
                 view.translatesAutoresizingMaskIntoConstraints = NO;
                 UIView *old = [self.layoutViews objectForKey:tag];
                 [self.layoutViews setObject:view forKey:tag];
