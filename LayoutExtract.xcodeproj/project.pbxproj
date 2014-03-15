@@ -18,19 +18,19 @@
 		2C5BC90F18CF15B700712C80 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5BC90E18CF15B700712C80 /* XCTest.framework */; };
 		2C5BC91018CF15B700712C80 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5BC8EC18CF15B700712C80 /* Foundation.framework */; };
 		2C5BC91118CF15B700712C80 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5BC8F018CF15B700712C80 /* UIKit.framework */; };
-		2C5BC92618CF16C300712C80 /* BBLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BC92518CF16C300712C80 /* BBLayoutView.m */; };
 		2C5BC92818CF172400712C80 /* Layout24.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BC92718CF172400712C80 /* Layout24.xib */; };
-		2C5BC92B18CF1C1C00712C80 /* BBLayoutPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BC92A18CF1C1C00712C80 /* BBLayoutPosition.m */; };
-		2C5BC92E18CF269E00712C80 /* BBLayoutConstraintGeneratorFirst.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BC92D18CF269E00712C80 /* BBLayoutConstraintGeneratorFirst.m */; };
-		2C5BC93118CF26E700712C80 /* BBLayoutConstraintGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BC93018CF26E700712C80 /* BBLayoutConstraintGenerator.m */; };
 		2C5BC93D18CF488B00712C80 /* Layout18.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BC93C18CF488B00712C80 /* Layout18.xib */; };
-		2C5BC94218CF489500712C80 /* BBLayoutConstraintGeneratorBoth.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BC93F18CF489500712C80 /* BBLayoutConstraintGeneratorBoth.m */; };
-		2C5BC94318CF489500712C80 /* BBLayoutConstraintGeneratorSecond.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BC94118CF489500712C80 /* BBLayoutConstraintGeneratorSecond.m */; };
 		2C5BC94518CF496E00712C80 /* Layout33.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BC94418CF496E00712C80 /* Layout33.xib */; };
-		2C65ACEA18D327400082BF61 /* BBLSInterpreter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C65ACE918D327400082BF61 /* BBLSInterpreter.m */; };
 		2C65ACEC18D32C990082BF61 /* Layout18.ls in Resources */ = {isa = PBXBuildFile; fileRef = 2C65ACEB18D32C990082BF61 /* Layout18.ls */; };
 		2C65ACEE18D33F400082BF61 /* Layout24.ls in Resources */ = {isa = PBXBuildFile; fileRef = 2C65ACED18D33F400082BF61 /* Layout24.ls */; };
 		2C65ACF018D33F630082BF61 /* Layout33.ls in Resources */ = {isa = PBXBuildFile; fileRef = 2C65ACEF18D33F630082BF61 /* Layout33.ls */; };
+		2C86A0FF18D45BCE00572ABA /* BBLayoutConstraintGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C86A0F218D45BCE00572ABA /* BBLayoutConstraintGenerator.m */; };
+		2C86A10018D45BCE00572ABA /* BBLayoutConstraintGeneratorBoth.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C86A0F418D45BCE00572ABA /* BBLayoutConstraintGeneratorBoth.m */; };
+		2C86A10118D45BCE00572ABA /* BBLayoutConstraintGeneratorFirst.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C86A0F618D45BCE00572ABA /* BBLayoutConstraintGeneratorFirst.m */; };
+		2C86A10218D45BCE00572ABA /* BBLayoutConstraintGeneratorSecond.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C86A0F818D45BCE00572ABA /* BBLayoutConstraintGeneratorSecond.m */; };
+		2C86A10318D45BCE00572ABA /* BBLayoutPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C86A0FA18D45BCE00572ABA /* BBLayoutPosition.m */; };
+		2C86A10418D45BCE00572ABA /* BBLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C86A0FC18D45BCE00572ABA /* BBLayoutView.m */; };
+		2C86A10518D45BCE00572ABA /* BBLSInterpreter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C86A0FE18D45BCE00572ABA /* BBLSInterpreter.m */; };
 		2CBC855F18D449E400199782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CBC855D18D449E400199782 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -60,26 +60,26 @@
 		2C5BC90718CF15B700712C80 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2C5BC90D18CF15B700712C80 /* LayoutExtractTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LayoutExtractTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5BC90E18CF15B700712C80 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		2C5BC92418CF16C300712C80 /* BBLayoutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBLayoutView.h; sourceTree = "<group>"; };
-		2C5BC92518CF16C300712C80 /* BBLayoutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBLayoutView.m; sourceTree = "<group>"; };
 		2C5BC92718CF172400712C80 /* Layout24.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Layout24.xib; sourceTree = "<group>"; };
-		2C5BC92918CF1C1C00712C80 /* BBLayoutPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBLayoutPosition.h; sourceTree = "<group>"; };
-		2C5BC92A18CF1C1C00712C80 /* BBLayoutPosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBLayoutPosition.m; sourceTree = "<group>"; };
-		2C5BC92C18CF269E00712C80 /* BBLayoutConstraintGeneratorFirst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBLayoutConstraintGeneratorFirst.h; sourceTree = "<group>"; };
-		2C5BC92D18CF269E00712C80 /* BBLayoutConstraintGeneratorFirst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBLayoutConstraintGeneratorFirst.m; sourceTree = "<group>"; };
-		2C5BC92F18CF26E700712C80 /* BBLayoutConstraintGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBLayoutConstraintGenerator.h; sourceTree = "<group>"; };
-		2C5BC93018CF26E700712C80 /* BBLayoutConstraintGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBLayoutConstraintGenerator.m; sourceTree = "<group>"; };
 		2C5BC93C18CF488B00712C80 /* Layout18.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Layout18.xib; sourceTree = "<group>"; };
-		2C5BC93E18CF489500712C80 /* BBLayoutConstraintGeneratorBoth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBLayoutConstraintGeneratorBoth.h; sourceTree = "<group>"; };
-		2C5BC93F18CF489500712C80 /* BBLayoutConstraintGeneratorBoth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBLayoutConstraintGeneratorBoth.m; sourceTree = "<group>"; };
-		2C5BC94018CF489500712C80 /* BBLayoutConstraintGeneratorSecond.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBLayoutConstraintGeneratorSecond.h; sourceTree = "<group>"; };
-		2C5BC94118CF489500712C80 /* BBLayoutConstraintGeneratorSecond.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBLayoutConstraintGeneratorSecond.m; sourceTree = "<group>"; };
 		2C5BC94418CF496E00712C80 /* Layout33.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Layout33.xib; sourceTree = "<group>"; };
-		2C65ACE818D327400082BF61 /* BBLSInterpreter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBLSInterpreter.h; sourceTree = "<group>"; };
-		2C65ACE918D327400082BF61 /* BBLSInterpreter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBLSInterpreter.m; sourceTree = "<group>"; };
 		2C65ACEB18D32C990082BF61 /* Layout18.ls */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Layout18.ls; sourceTree = "<group>"; };
 		2C65ACED18D33F400082BF61 /* Layout24.ls */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Layout24.ls; sourceTree = "<group>"; };
 		2C65ACEF18D33F630082BF61 /* Layout33.ls */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Layout33.ls; sourceTree = "<group>"; };
+		2C86A0F118D45BCE00572ABA /* BBLayoutConstraintGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BBLayoutConstraintGenerator.h; path = LayoutView/BBLayoutConstraintGenerator.h; sourceTree = "<group>"; };
+		2C86A0F218D45BCE00572ABA /* BBLayoutConstraintGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BBLayoutConstraintGenerator.m; path = LayoutView/BBLayoutConstraintGenerator.m; sourceTree = "<group>"; };
+		2C86A0F318D45BCE00572ABA /* BBLayoutConstraintGeneratorBoth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BBLayoutConstraintGeneratorBoth.h; path = LayoutView/BBLayoutConstraintGeneratorBoth.h; sourceTree = "<group>"; };
+		2C86A0F418D45BCE00572ABA /* BBLayoutConstraintGeneratorBoth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BBLayoutConstraintGeneratorBoth.m; path = LayoutView/BBLayoutConstraintGeneratorBoth.m; sourceTree = "<group>"; };
+		2C86A0F518D45BCE00572ABA /* BBLayoutConstraintGeneratorFirst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BBLayoutConstraintGeneratorFirst.h; path = LayoutView/BBLayoutConstraintGeneratorFirst.h; sourceTree = "<group>"; };
+		2C86A0F618D45BCE00572ABA /* BBLayoutConstraintGeneratorFirst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BBLayoutConstraintGeneratorFirst.m; path = LayoutView/BBLayoutConstraintGeneratorFirst.m; sourceTree = "<group>"; };
+		2C86A0F718D45BCE00572ABA /* BBLayoutConstraintGeneratorSecond.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BBLayoutConstraintGeneratorSecond.h; path = LayoutView/BBLayoutConstraintGeneratorSecond.h; sourceTree = "<group>"; };
+		2C86A0F818D45BCE00572ABA /* BBLayoutConstraintGeneratorSecond.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BBLayoutConstraintGeneratorSecond.m; path = LayoutView/BBLayoutConstraintGeneratorSecond.m; sourceTree = "<group>"; };
+		2C86A0F918D45BCE00572ABA /* BBLayoutPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BBLayoutPosition.h; path = LayoutView/BBLayoutPosition.h; sourceTree = "<group>"; };
+		2C86A0FA18D45BCE00572ABA /* BBLayoutPosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BBLayoutPosition.m; path = LayoutView/BBLayoutPosition.m; sourceTree = "<group>"; };
+		2C86A0FB18D45BCE00572ABA /* BBLayoutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BBLayoutView.h; path = LayoutView/BBLayoutView.h; sourceTree = "<group>"; };
+		2C86A0FC18D45BCE00572ABA /* BBLayoutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BBLayoutView.m; path = LayoutView/BBLayoutView.m; sourceTree = "<group>"; };
+		2C86A0FD18D45BCE00572ABA /* BBLSInterpreter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BBLSInterpreter.h; path = LayoutView/BBLSInterpreter.h; sourceTree = "<group>"; };
+		2C86A0FE18D45BCE00572ABA /* BBLSInterpreter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BBLSInterpreter.m; path = LayoutView/BBLSInterpreter.m; sourceTree = "<group>"; };
 		2CBC855E18D449E400199782 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = LayoutExtract/en.lproj/Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -163,21 +163,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		2C5BC93818CF273600712C80 /* Layout Constraint Generator */ = {
-			isa = PBXGroup;
-			children = (
-				2C5BC93E18CF489500712C80 /* BBLayoutConstraintGeneratorBoth.h */,
-				2C5BC93F18CF489500712C80 /* BBLayoutConstraintGeneratorBoth.m */,
-				2C5BC94018CF489500712C80 /* BBLayoutConstraintGeneratorSecond.h */,
-				2C5BC94118CF489500712C80 /* BBLayoutConstraintGeneratorSecond.m */,
-				2C5BC92C18CF269E00712C80 /* BBLayoutConstraintGeneratorFirst.h */,
-				2C5BC92D18CF269E00712C80 /* BBLayoutConstraintGeneratorFirst.m */,
-				2C5BC92F18CF26E700712C80 /* BBLayoutConstraintGenerator.h */,
-				2C5BC93018CF26E700712C80 /* BBLayoutConstraintGenerator.m */,
-			);
-			name = "Layout Constraint Generator";
-			sourceTree = "<group>";
-		};
 		2C5BC93B18CF44F100712C80 /* Layouts */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,13 +179,20 @@
 		2C65ACE718D325230082BF61 /* Layout View */ = {
 			isa = PBXGroup;
 			children = (
-				2C5BC92418CF16C300712C80 /* BBLayoutView.h */,
-				2C5BC92518CF16C300712C80 /* BBLayoutView.m */,
-				2C5BC92918CF1C1C00712C80 /* BBLayoutPosition.h */,
-				2C5BC92A18CF1C1C00712C80 /* BBLayoutPosition.m */,
-				2C5BC93818CF273600712C80 /* Layout Constraint Generator */,
-				2C65ACE818D327400082BF61 /* BBLSInterpreter.h */,
-				2C65ACE918D327400082BF61 /* BBLSInterpreter.m */,
+				2C86A0F118D45BCE00572ABA /* BBLayoutConstraintGenerator.h */,
+				2C86A0F218D45BCE00572ABA /* BBLayoutConstraintGenerator.m */,
+				2C86A0F318D45BCE00572ABA /* BBLayoutConstraintGeneratorBoth.h */,
+				2C86A0F418D45BCE00572ABA /* BBLayoutConstraintGeneratorBoth.m */,
+				2C86A0F518D45BCE00572ABA /* BBLayoutConstraintGeneratorFirst.h */,
+				2C86A0F618D45BCE00572ABA /* BBLayoutConstraintGeneratorFirst.m */,
+				2C86A0F718D45BCE00572ABA /* BBLayoutConstraintGeneratorSecond.h */,
+				2C86A0F818D45BCE00572ABA /* BBLayoutConstraintGeneratorSecond.m */,
+				2C86A0F918D45BCE00572ABA /* BBLayoutPosition.h */,
+				2C86A0FA18D45BCE00572ABA /* BBLayoutPosition.m */,
+				2C86A0FB18D45BCE00572ABA /* BBLayoutView.h */,
+				2C86A0FC18D45BCE00572ABA /* BBLayoutView.m */,
+				2C86A0FD18D45BCE00572ABA /* BBLSInterpreter.h */,
+				2C86A0FE18D45BCE00572ABA /* BBLSInterpreter.m */,
 			);
 			name = "Layout View";
 			sourceTree = "<group>";
@@ -308,16 +300,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C5BC92B18CF1C1C00712C80 /* BBLayoutPosition.m in Sources */,
-				2C65ACEA18D327400082BF61 /* BBLSInterpreter.m in Sources */,
+				2C86A10018D45BCE00572ABA /* BBLayoutConstraintGeneratorBoth.m in Sources */,
+				2C86A10518D45BCE00572ABA /* BBLSInterpreter.m in Sources */,
 				2C5BC90618CF15B700712C80 /* BBViewController.m in Sources */,
+				2C86A10218D45BCE00572ABA /* BBLayoutConstraintGeneratorSecond.m in Sources */,
 				2C5BC8FD18CF15B700712C80 /* BBAppDelegate.m in Sources */,
-				2C5BC94218CF489500712C80 /* BBLayoutConstraintGeneratorBoth.m in Sources */,
-				2C5BC93118CF26E700712C80 /* BBLayoutConstraintGenerator.m in Sources */,
-				2C5BC94318CF489500712C80 /* BBLayoutConstraintGeneratorSecond.m in Sources */,
-				2C5BC92618CF16C300712C80 /* BBLayoutView.m in Sources */,
+				2C86A10418D45BCE00572ABA /* BBLayoutView.m in Sources */,
+				2C86A10318D45BCE00572ABA /* BBLayoutPosition.m in Sources */,
+				2C86A0FF18D45BCE00572ABA /* BBLayoutConstraintGenerator.m in Sources */,
 				2C5BC8F918CF15B700712C80 /* main.m in Sources */,
-				2C5BC92E18CF269E00712C80 /* BBLayoutConstraintGeneratorFirst.m in Sources */,
+				2C86A10118D45BCE00572ABA /* BBLayoutConstraintGeneratorFirst.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
