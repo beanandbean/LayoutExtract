@@ -8,6 +8,11 @@
 
 #import "BBLSInterpreter.h"
 
+typedef enum {
+    BBLayoutDataPositionBundle,
+    BBLayoutDataPositionDocument
+} BBLayoutDataPosition;
+
 @class BBLayoutView;
 
 @protocol BBLayoutViewDataSource <NSObject>
@@ -20,7 +25,8 @@
 
 @property (strong, nonatomic) id<BBLayoutViewDataSource> dataSource;
 
-- (id)initWithNibNamed:(NSString *)nib;
+- (id)initWithNibNamed:(NSString *)nib atPosition:(BBLayoutDataPosition)position;
+- (id)initWithNibData:(NSData *)nibData andLSData:(NSData *)lsData;
 
 - (void)extractPositions;
 

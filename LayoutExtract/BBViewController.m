@@ -20,13 +20,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
+    
     [self initializeLayoutViewForLayout:@"Layout18"];
     self.segmentedControl.selectedSegmentIndex = 0;
 }
 
 - (void)initializeLayoutViewForLayout:(NSString *)layout {
-    self.layoutView = [[BBLayoutView alloc] initWithNibNamed:layout];
+    self.layoutView = [[BBLayoutView alloc] initWithNibNamed:layout atPosition:BBLayoutDataPositionBundle];
     self.layoutView.dataSource = self;
     self.layoutView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:self.layoutView];

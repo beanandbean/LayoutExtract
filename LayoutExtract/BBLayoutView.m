@@ -30,28 +30,55 @@
 
 @implementation BBLayoutView
 
-- (id)initWithNibNamed:(NSString *)nib {
-    NSString *specified = [NSString stringWithFormat:@"%@@%@", nib, UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ? @"iphone" : @"ipad"];
-    NSString *nibPath = [[NSBundle mainBundle] pathForResource:specified ofType:@"xib"];
-    NSString *name;
-    if ([[NSFileManager defaultManager] fileExistsAtPath:nibPath]) {
-        name = specified;
-    } else {
-        name = nib;
+- (id)initWithNibNamed:(NSString *)nib atPosition:(BBLayoutDataPosition)position {
+    NSString *documentPath;
+    if (position == BBLayoutDataPositionDocument) {
+        documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     }
-    self = [[NSBundle mainBundle] loadNibNamed:name owner:nil options:nil].firstObject;
+    NSString *specified = [NSString stringWithFormat:@"%@@%@", nib, UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ? @"iphone" : @"ipad"];
+    NSString *nibPath;
+    if (position == BBLayoutDataPositionDocument) {
+        nibPath = [[documentPath stringByAppendingPathComponent:specified] stringByAppendingPathExtension:@"nib"];
+    } else {
+        nibPath = [[NSBundle mainBundle] pathForResource:specified ofType:@"nib"];
+    }
+    if (!nibPath || ![[NSFileManager defaultManager] fileExistsAtPath:nibPath]) {
+        if (position == BBLayoutDataPositionDocument) {
+            nibPath = [[documentPath stringByAppendingPathComponent:nib] stringByAppendingPathExtension:@"nib"];
+        } else {
+            nibPath = [[NSBundle mainBundle] pathForResource:nib ofType:@"nib"];
+        }
+    }
+    NSData *nibData = [NSData dataWithContentsOfFile:nibPath];
+    NSString *scriptPath;
+    if (position == BBLayoutDataPositionDocument) {
+        scriptPath = [[documentPath stringByAppendingPathComponent:specified] stringByAppendingPathExtension:@"ls"];
+    } else {
+        nibPath = [[NSBundle mainBundle] pathForResource:specified ofType:@"ls"];
+    }
+    if (!scriptPath || ![[NSFileManager defaultManager] fileExistsAtPath:scriptPath]) {
+        if (position == BBLayoutDataPositionDocument) {
+            scriptPath = [[documentPath stringByAppendingPathComponent:nib] stringByAppendingPathExtension:@"ls"];
+        } else {
+            scriptPath = [[NSBundle mainBundle] pathForResource:nib ofType:@"ls"];
+        }
+    }
+    NSData *lsData = [NSData dataWithContentsOfFile:scriptPath];
+    self = [self initWithNibData:nibData andLSData:lsData];
+    return self;
+}
+
+- (id)initWithNibData:(NSData *)nibData andLSData:(NSData *)lsData {
+    UINib *nibObj = [UINib nibWithData:nibData bundle:nil];
+    self = [nibObj instantiateWithOwner:nil options:nil].firstObject;
     if (self) {
         self.layoutTags = [NSMutableSet set];
         self.layoutViews = [NSMutableDictionary dictionary];
         self.layoutConstraints = [NSMutableDictionary dictionary];
         self.layoutCornerRadii = [NSMutableDictionary dictionary];
         [self extractPositions];
-        NSString *scriptPath = [[NSBundle mainBundle] pathForResource:specified ofType:@"ls"];
-        if (![[NSFileManager defaultManager] fileExistsAtPath:scriptPath]) {
-            scriptPath = [[NSBundle mainBundle] pathForResource:nib ofType:@"ls"];
-        }
-        if ([[NSFileManager defaultManager] fileExistsAtPath:scriptPath]) {
-            NSString *data = [NSString stringWithContentsOfFile:scriptPath usedEncoding:nil error:nil];
+        if (lsData) {
+            NSString *data = [[NSString alloc] initWithData:lsData encoding:NSUTF8StringEncoding];
             [[[BBLSInterpreter alloc] initWithDelegate:self] feed:data];
         }
     }
