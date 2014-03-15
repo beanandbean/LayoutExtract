@@ -8,16 +8,7 @@
 
 #import "BBLayoutPosition.h"
 
-static BBLayoutPosition *g_layoutPositionNull;
-
 @implementation BBLayoutPosition
-
-+ (BBLayoutPosition *)layoutPositionNull {
-    if (!g_layoutPositionNull) {
-        g_layoutPositionNull = [[BBLayoutPosition alloc] init];
-    }
-    return g_layoutPositionNull;
-}
 
 - (id)init {
     self = [super init];

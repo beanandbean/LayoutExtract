@@ -26,7 +26,26 @@
 }
 
 - (void)initializeLayoutViewForLayout:(NSString *)layout {
-    self.layoutView = [[BBLayoutView alloc] initWithNibNamed:layout atPosition:BBLayoutDataPositionBundle];
+    if (layout) {
+        self.layoutView = [[BBLayoutView alloc] initWithNibNamed:layout atPosition:BBLayoutDataPositionBundle];
+    } else {
+        self.layoutView = [[BBLayoutView alloc] init];
+        NSMutableArray *positions = [NSMutableArray arrayWithCapacity:8];
+        for (int i = 0; i < 8; i++) {
+            [positions addObject:[self.layoutView addPositionWithTag:i]];
+        }
+        for (int i = 0; i < 7; i++) {
+            [self.layoutView addPositionConstraint:[NSLayoutConstraint constraintWithItem:[positions objectAtIndex:i] attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:[positions objectAtIndex:i + 1] attribute:NSLayoutAttributeLeft multiplier:1.0 constant:-8.0]];
+            [self.layoutView addPositionConstraint:[NSLayoutConstraint constraintWithItem:[positions objectAtIndex:i] attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:[positions objectAtIndex:i + 1] attribute:NSLayoutAttributeTop multiplier:1.0 constant:-8.0]];
+            [self.layoutView addPositionConstraint:[NSLayoutConstraint constraintWithItem:[positions objectAtIndex:i] attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:[positions objectAtIndex:i + 1] attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0.0]];
+            [self.layoutView addPositionConstraint:[NSLayoutConstraint constraintWithItem:[positions objectAtIndex:i] attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:[positions objectAtIndex:i + 1] attribute:NSLayoutAttributeHeight multiplier:1.0 constant:0.0]];
+        }
+        [self.layoutView addPositionConstraint:[NSLayoutConstraint constraintWithItem:positions.firstObject attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.layoutView attribute:NSLayoutAttributeLeft multiplier:1.0 constant:21.0]];
+        [self.layoutView addPositionConstraint:[NSLayoutConstraint constraintWithItem:positions.firstObject attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.layoutView attribute:NSLayoutAttributeTop multiplier:1.0 constant:21.0]];
+        [self.layoutView addPositionConstraint:[NSLayoutConstraint constraintWithItem:positions.lastObject attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.layoutView attribute:NSLayoutAttributeRight multiplier:1.0 constant:-21.0]];
+        [self.layoutView addPositionConstraint:[NSLayoutConstraint constraintWithItem:positions.lastObject attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.layoutView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-21.0]];
+        [self.layoutView feedLayoutScript:@"$(*).cornerRadius = 5"];
+    }
     self.layoutView.dataSource = self;
     self.layoutView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:self.layoutView];
@@ -65,7 +84,8 @@
             break;
             
         default:
-            return;
+            nib = nil;
+            break;
     }
     [self initializeLayoutViewForLayout:nib];
 }

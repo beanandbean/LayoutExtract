@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Bean & Bean. All rights reserved.
 //
 
+#import "BBLayoutPosition.h"
+
 #import "BBLSInterpreter.h"
 
 typedef enum {
@@ -28,10 +30,13 @@ typedef enum {
 - (id)initWithNibNamed:(NSString *)nib atPosition:(BBLayoutDataPosition)position;
 - (id)initWithNibData:(NSData *)nibData andLSData:(NSData *)lsData;
 
-- (void)extractPositions;
+- (void)reloadData;
 
 - (void)replacePositionTagged:(NSInteger)tag withView:(UIView *)view;
 
-- (void)reloadData;
+- (BBLayoutPosition *)addPositionWithTag:(NSInteger)tag;
+- (void)addPositionConstraint:(NSLayoutConstraint *)constraint;
+
+- (void)feedLayoutScript:(NSString *)script;
 
 @end

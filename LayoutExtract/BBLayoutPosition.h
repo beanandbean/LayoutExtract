@@ -8,6 +8,4 @@
 
 @interface BBLayoutPosition : UIView
 
-+ (BBLayoutPosition *)layoutPositionNull;
-
 @end
