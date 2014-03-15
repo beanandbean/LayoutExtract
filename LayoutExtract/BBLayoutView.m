@@ -62,6 +62,7 @@
     NSMutableSet *layoutPos = [NSMutableSet set];
     for (UIView *view in self.subviews) {
         if (view.class == [BBLayoutPosition class]) {
+            view.translatesAutoresizingMaskIntoConstraints = NO;
             [self.layoutViews setObject:[BBLayoutPosition layoutPositionNull] forKey:TAG(view)];
             [self.layoutConstraints setObject:[NSMutableArray array] forKey:TAG(view)];
             [self.layoutTags addObject:TAG(view)];

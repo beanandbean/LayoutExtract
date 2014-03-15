@@ -18,9 +18,28 @@ static NSRegularExpression *g_floatPropertyExpression;
 
 @implementation BBLSInterpreter
 
+// $(TAG).PROP = [-]VALUE
+//
+// SPACE ---- \\s*
+//    $( ---- \\$\\(
+//   TAG -01- ([0123456789]+|\\*)
+//     ) ---- \\)
+// SPACE ---- \\s*
+//     . ---- \\.
+// SPACE ---- \\s*
+//  PROP -02- ([abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789]+)
+// SPACE ---- \\s*
+//     = ---- =
+// SPACE ---- \\s*
+// VALUE B03- (
+//  NEGA -04- (-)?
+// VALUE -03- [01234567890]+
+//  DECI -05- (\\.[0123456789]+)?
+// VALUE E03- )
+// SPACE ---- \\s*
 + (NSRegularExpression *)floatPropertyExpression {
     if (!g_floatPropertyExpression) {
-        g_floatPropertyExpression = [NSRegularExpression regularExpressionWithPattern:@"\\s*\\$\\(([0123456789]+|\\*)\\)\\s*\\.\\s*([abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789]+)\\s*=\\s*([01234567890]+(.[0123456789]+)?)\\s*" options:0 error:nil];
+        g_floatPropertyExpression = [NSRegularExpression regularExpressionWithPattern:@"\\s*\\$\\(([0123456789]+|\\*)\\)\\s*\\.\\s*([abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789]+)\\s*=\\s*((-)?[01234567890]+(\\.[0123456789]+)?)\\s*" options:0 error:nil];
     }
     return g_floatPropertyExpression;
 }
