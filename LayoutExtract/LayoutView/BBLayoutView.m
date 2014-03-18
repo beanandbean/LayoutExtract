@@ -294,8 +294,38 @@
 
 # pragma mark - BBLSInterpreterDelegate implementation
 
-- (void)interpreter:(BBLSInterpreter *)interpreter floatPropertyAssignmentDetectedToProperty:(NSString *)property ofTag:(NSInteger)tag withValue:(float)value {
-    if ((tag == LS_ALL || [self.layoutViews.allKeys containsObject:INTNUM(tag)]) && [property isEqualToString:@"cornerRadius"]) {
+- (void)interpreter:(BBLSInterpreter *)interpreter addPositionWithTag:(NSInteger)tag {
+    [self addPositionWithTag:tag];
+}
+
+- (void)interpreter:(BBLSInterpreter *)interpreter addConstraintWithTag:(NSInteger)tag1 attribute:(NSLayoutAttribute)attr1 relatedBy:(NSLayoutRelation)relation toTag:(NSInteger)tag2 attribute:(NSLayoutAttribute)attr2 multiplier:(float)mul constant:(float)cons priority:(UILayoutPriority)priority {
+    UIView *view1;
+    if (tag1 == LS_PARENT) {
+        view1 = self;
+    } else if (tag1 == LS_NONE) {
+        view1 = nil;
+    } else if ([self.layoutViews.allKeys containsObject:INTNUM(tag1)]) {
+        view1 = [self.layoutViews objectForKey:INTNUM(tag1)];
+    } else {
+        view1 = [self viewWithTag:tag1];
+    }
+    UIView *view2;
+    if (tag2 == LS_PARENT) {
+        view2 = self;
+    } else if (tag2 == LS_NONE) {
+        view2 = nil;
+    } else if ([self.layoutViews.allKeys containsObject:INTNUM(tag2)]) {
+        view2 = [self.layoutViews objectForKey:INTNUM(tag2)];
+    } else {
+        view2 = [self viewWithTag:tag2];
+    }
+    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:view1 attribute:attr1 relatedBy:relation toItem:view2 attribute:attr2 multiplier:mul constant:cons];
+    constraint.priority = priority;
+    [self addConstraint:constraint];
+}
+
+- (void)interpreter:(BBLSInterpreter *)interpreter setCornerRadiusOfTag:(NSInteger)tag value:(float)value {
+    if (tag == LS_ALL || [self.layoutViews.allKeys containsObject:INTNUM(tag)]) {
         [self.layoutCornerRadii setObject:FLOATNUM(value) forKey:INTNUM(tag)];
     }
 }

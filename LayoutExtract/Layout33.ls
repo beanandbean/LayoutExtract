@@ -1,1 +1,1 @@
-$(*).cornerRadius = 20
+cornerRadius * 20

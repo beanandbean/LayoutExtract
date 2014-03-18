@@ -1,1 +1,1 @@
-$(*).cornerRadius = 30
+cornerRadius * 30

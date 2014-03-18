@@ -7,12 +7,16 @@
 //
 
 static const NSInteger LS_ALL = INT_MAX;
+static const NSInteger LS_PARENT = INT_MAX - 1;
+static const NSInteger LS_NONE = INT_MIN;
 
 @class BBLSInterpreter;
 
 @protocol BBLSInterpreterDelegate <NSObject>
 
-- (void)interpreter:(BBLSInterpreter *)interpreter floatPropertyAssignmentDetectedToProperty:(NSString *)property ofTag:(NSInteger)tag withValue:(float)value;
+- (void)interpreter:(BBLSInterpreter *)interpreter addPositionWithTag:(NSInteger)tag;
+- (void)interpreter:(BBLSInterpreter *)interpreter addConstraintWithTag:(NSInteger)tag1 attribute:(NSLayoutAttribute)attr1 relatedBy:(NSLayoutRelation)relation toTag:(NSInteger)tag2 attribute:(NSLayoutAttribute)attr2 multiplier:(float)mul constant:(float)cons priority:(UILayoutPriority)priority;
+- (void)interpreter:(BBLSInterpreter *)interpreter setCornerRadiusOfTag:(NSInteger)tag value:(float)value;
 
 @end
 

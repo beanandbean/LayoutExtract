@@ -19,6 +19,9 @@
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="TaR-pm-v7P">
                                 <rect key="frame" x="20" y="20" width="728" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="XDB-Fh-CSR"/>
+                                </constraints>
                                 <segments>
                                     <segment title="1 * 8"/>
                                     <segment title="2 * 4"/>
