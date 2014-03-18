@@ -122,7 +122,7 @@
                 for (BBLayoutConstraintGenerator *generator in [self.layoutConstraints objectForKey:tag]) {
                     NSLayoutConstraint *destroyed = generator.destroyed;
                     if ([self.constraints containsObject:destroyed]) {
-                        [self removeConstraint:destroyed];;
+                        [super removeConstraint:destroyed];
                     }
                 }
             }
@@ -142,7 +142,7 @@
                 for (BBLayoutConstraintGenerator *generator in [self.layoutConstraints objectForKey:tag]) {
                     NSLayoutConstraint *generated = generator.generated;
                     if (![self.constraints containsObject:generated]) {
-                        [self addConstraint:generated];
+                        [super addConstraint:generated];
                     }
                 }
             }
@@ -153,7 +153,7 @@
 - (void)replacePositionTagged:(NSInteger)tag withView:(UIView *)view {
     if (self.layoutViews) {
         for (BBLayoutConstraintGenerator *generator in [self.layoutConstraints objectForKey:INTNUM(tag)]) {
-            [self removeConstraint:generator.destroyed];
+            [super removeConstraint:generator.destroyed];
         }
         if (!view) {
             view = [[BBLayoutPosition alloc] init];
@@ -165,7 +165,7 @@
         [self insertSubview:view aboveSubview:old];
         [old removeFromSuperview];
         for (BBLayoutConstraintGenerator *generator in [self.layoutConstraints objectForKey:INTNUM(tag)]) {
-            [self addConstraint:generator.generated];
+            [super addConstraint:generator.generated];
         }
     }
 }
@@ -179,8 +179,15 @@
     return position;
 }
 
-- (void)addPositionConstraint:(NSLayoutConstraint *)constraint {
-    [self addConstraint:constraint];
+- (void)addPositionSubview:(UIView *)view withTag:(NSInteger)tag {
+    view.tag = tag;
+    [self.layoutViews setObject:view forKey:INTNUM(tag)];
+    [self.layoutConstraints setObject:[NSMutableArray array] forKey:INTNUM(tag)];
+    [self addSubview:view];
+}
+
+- (void)addConstraint:(NSLayoutConstraint *)constraint {
+    [super addConstraint:constraint];
     NSArray *layoutPos = self.layoutViews.allValues;
     if ([layoutPos containsObject:constraint.firstItem] && [layoutPos containsObject:constraint.secondItem]) {
         BBLayoutConstraintGeneratorBoth *generator = [[BBLayoutConstraintGeneratorBoth alloc] initWithPositionDictionary:self.layoutViews andConstraint:constraint];
@@ -192,6 +199,29 @@
     } else if ([layoutPos containsObject:constraint.secondItem]) {
         BBLayoutConstraintGeneratorSecond *generator = [[BBLayoutConstraintGeneratorSecond alloc] initWithPositionDictionary:self.layoutViews andConstraint:constraint];
         [((NSMutableArray *)[self.layoutConstraints objectForKey:TAG(constraint.secondItem)]) addObject:generator];
+    }
+}
+
+- (void)addConstraints:(NSArray *)constraints {
+    for (NSLayoutConstraint *constraint in constraints) {
+        [self addConstraint:constraint];
+    }
+}
+
+- (void)removeConstraint:(NSLayoutConstraint *)constraint {
+    [super removeConstraint:constraint];
+    for (NSMutableArray *constraints in self.layoutConstraints.allValues) {
+        for (BBLayoutConstraintGenerator *generator in constraints.copy) {
+            if (generator.generatedConstraint == constraint) {
+                [constraints removeObject:generator];
+            }
+        }
+    }
+}
+
+- (void)removeConstraints:(NSArray *)constraints {
+    for (NSLayoutConstraint *constraint in constraints) {
+        [self removeConstraint:constraint];
     }
 }
 

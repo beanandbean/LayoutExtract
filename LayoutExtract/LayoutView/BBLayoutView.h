@@ -35,7 +35,7 @@ typedef enum {
 - (void)replacePositionTagged:(NSInteger)tag withView:(UIView *)view;
 
 - (BBLayoutPosition *)addPositionWithTag:(NSInteger)tag;
-- (void)addPositionConstraint:(NSLayoutConstraint *)constraint;
+- (void)addPositionSubview:(UIView *)view withTag:(NSInteger)tag;
 
 - (void)feedLayoutScript:(NSString *)script;
 
