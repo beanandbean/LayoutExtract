@@ -27,7 +27,11 @@
 
 - (void)initializeLayoutViewForLayout:(NSString *)layout {
     if (layout) {
-        self.layoutView = [[BBLayoutView alloc] initWithNibNamed:layout atPosition:BBLayoutDataPositionBundle];
+        if ([layout isEqualToString:@"LayoutLS"]) {
+            self.layoutView = [[BBLayoutView alloc] initWithLSNamed:layout atPosition:BBLayoutDataPositionBundle];
+        } else {
+            self.layoutView = [[BBLayoutView alloc] initWithNibNamed:layout atPosition:BBLayoutDataPositionBundle];
+        }
     } else {
         self.layoutView = [[BBLayoutView alloc] init];
         NSMutableArray *positions = [NSMutableArray arrayWithCapacity:8];
@@ -82,6 +86,10 @@
             
         case 2:
             nib = @"Layout33";
+            break;
+            
+        case 4:
+            nib = @"LayoutLS";
             break;
             
         default:

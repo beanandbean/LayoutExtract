@@ -24,6 +24,7 @@
                                     <segment title="2 * 4"/>
                                     <segment title="3 * 3"/>
                                     <segment title="Code"/>
+                                    <segment title="LS"/>
                                 </segments>
                                 <connections>
                                     <action selector="segmentedControlValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="sys-bd-JQ1"/>

@@ -27,8 +27,11 @@ typedef enum {
 
 @property (strong, nonatomic) id<BBLayoutViewDataSource> dataSource;
 
-- (id)initWithNibNamed:(NSString *)nib atPosition:(BBLayoutDataPosition)position;
+- (id)initWithNibNamed:(NSString *)name atPosition:(BBLayoutDataPosition)position;
 - (id)initWithNibData:(NSData *)nibData andLSData:(NSData *)lsData;
+
+- (id)initWithLSNamed:(NSString *)name atPosition:(BBLayoutDataPosition)position;
+- (id)initWithLSData:(NSData *)lsData;
 
 - (void)reloadData;
 

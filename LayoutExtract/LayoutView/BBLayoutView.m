@@ -37,12 +37,12 @@
     return self;
 }
 
-- (id)initWithNibNamed:(NSString *)nib atPosition:(BBLayoutDataPosition)position {
+- (id)initWithNibNamed:(NSString *)name atPosition:(BBLayoutDataPosition)position {
     NSString *documentPath;
     if (position == BBLayoutDataPositionDocument) {
         documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     }
-    NSString *specified = [NSString stringWithFormat:@"%@@%@", nib, UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ? @"iphone" : @"ipad"];
+    NSString *specified = [NSString stringWithFormat:@"%@@%@", name, UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ? @"iphone" : @"ipad"];
     NSString *nibPath;
     if (position == BBLayoutDataPositionDocument) {
         nibPath = [[documentPath stringByAppendingPathComponent:specified] stringByAppendingPathExtension:@"nib"];
@@ -51,9 +51,9 @@
     }
     if (!nibPath || ![[NSFileManager defaultManager] fileExistsAtPath:nibPath]) {
         if (position == BBLayoutDataPositionDocument) {
-            nibPath = [[documentPath stringByAppendingPathComponent:nib] stringByAppendingPathExtension:@"nib"];
+            nibPath = [[documentPath stringByAppendingPathComponent:name] stringByAppendingPathExtension:@"nib"];
         } else {
-            nibPath = [[NSBundle mainBundle] pathForResource:nib ofType:@"nib"];
+            nibPath = [[NSBundle mainBundle] pathForResource:name ofType:@"nib"];
         }
     }
     NSData *nibData = [NSData dataWithContentsOfFile:nibPath];
@@ -61,13 +61,13 @@
     if (position == BBLayoutDataPositionDocument) {
         scriptPath = [[documentPath stringByAppendingPathComponent:specified] stringByAppendingPathExtension:@"ls"];
     } else {
-        nibPath = [[NSBundle mainBundle] pathForResource:specified ofType:@"ls"];
+        scriptPath = [[NSBundle mainBundle] pathForResource:specified ofType:@"ls"];
     }
     if (!scriptPath || ![[NSFileManager defaultManager] fileExistsAtPath:scriptPath]) {
         if (position == BBLayoutDataPositionDocument) {
-            scriptPath = [[documentPath stringByAppendingPathComponent:nib] stringByAppendingPathExtension:@"ls"];
+            scriptPath = [[documentPath stringByAppendingPathComponent:name] stringByAppendingPathExtension:@"ls"];
         } else {
-            scriptPath = [[NSBundle mainBundle] pathForResource:nib ofType:@"ls"];
+            scriptPath = [[NSBundle mainBundle] pathForResource:name ofType:@"ls"];
         }
     }
     NSData *lsData = [NSData dataWithContentsOfFile:scriptPath];
@@ -87,6 +87,39 @@
             NSString *script = [[NSString alloc] initWithData:lsData encoding:NSUTF8StringEncoding];
             [[[BBLSInterpreter alloc] initWithDelegate:self] feed:script];
         }
+    }
+    return self;
+}
+
+- (id)initWithLSNamed:(NSString *)name atPosition:(BBLayoutDataPosition)position {
+    NSString *documentPath;
+    if (position == BBLayoutDataPositionDocument) {
+        documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    }
+    NSString *specified = [NSString stringWithFormat:@"%@@%@", name, UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ? @"iphone" : @"ipad"];
+    NSString *scriptPath;
+    if (position == BBLayoutDataPositionDocument) {
+        scriptPath = [[documentPath stringByAppendingPathComponent:specified] stringByAppendingPathExtension:@"ls"];
+    } else {
+        scriptPath = [[NSBundle mainBundle] pathForResource:specified ofType:@"ls"];
+    }
+    if (!scriptPath || ![[NSFileManager defaultManager] fileExistsAtPath:scriptPath]) {
+        if (position == BBLayoutDataPositionDocument) {
+            scriptPath = [[documentPath stringByAppendingPathComponent:name] stringByAppendingPathExtension:@"ls"];
+        } else {
+            scriptPath = [[NSBundle mainBundle] pathForResource:name ofType:@"ls"];
+        }
+    }
+    NSData *lsData = [NSData dataWithContentsOfFile:scriptPath];
+    self = [self initWithLSData:lsData];
+    return self;
+}
+
+- (id)initWithLSData:(NSData *)lsData {
+    self = [super init];
+    if (self) {
+        NSString *script = [[NSString alloc] initWithData:lsData encoding:NSUTF8StringEncoding];
+        [[[BBLSInterpreter alloc] initWithDelegate:self] feed:script];
     }
     return self;
 }

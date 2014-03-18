@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C2EF5D918D8208F0076DB77 /* LayoutLS.ls in Resources */ = {isa = PBXBuildFile; fileRef = 2C2EF5D818D8208F0076DB77 /* LayoutLS.ls */; };
 		2C5BC8ED18CF15B700712C80 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5BC8EC18CF15B700712C80 /* Foundation.framework */; };
 		2C5BC8EF18CF15B700712C80 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5BC8EE18CF15B700712C80 /* CoreGraphics.framework */; };
 		2C5BC8F118CF15B700712C80 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5BC8F018CF15B700712C80 /* UIKit.framework */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C2EF5D818D8208F0076DB77 /* LayoutLS.ls */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LayoutLS.ls; sourceTree = "<group>"; };
 		2C5BC8E918CF15B700712C80 /* LayoutExtract.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LayoutExtract.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5BC8EC18CF15B700712C80 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2C5BC8EE18CF15B700712C80 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -172,6 +174,7 @@
 				2C65ACEB18D32C990082BF61 /* Layout18.ls */,
 				2C65ACED18D33F400082BF61 /* Layout24.ls */,
 				2C65ACEF18D33F630082BF61 /* Layout33.ls */,
+				2C2EF5D818D8208F0076DB77 /* LayoutLS.ls */,
 			);
 			name = Layouts;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				2C5BC94518CF496E00712C80 /* Layout33.xib in Resources */,
 				2C5BC92818CF172400712C80 /* Layout24.xib in Resources */,
 				2C65ACEE18D33F400082BF61 /* Layout24.ls in Resources */,
+				2C2EF5D918D8208F0076DB77 /* LayoutLS.ls in Resources */,
 				2C5BC90818CF15B700712C80 /* Images.xcassets in Resources */,
 				2CBC855F18D449E400199782 /* Main.storyboard in Resources */,
 				2C5BC93D18CF488B00712C80 /* Layout18.xib in Resources */,
