@@ -16,6 +16,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="85q-29-xVx" customClass="BBLayoutPosition">
+                                <rect key="frame" x="0.0" y="48" width="768" height="976"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="TaR-pm-v7P">
                                 <rect key="frame" x="20" y="20" width="728" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -39,7 +44,11 @@
                             <constraint firstItem="TaR-pm-v7P" firstAttribute="top" secondItem="Vh3-4a-vxH" secondAttribute="bottom" id="27f-Kg-RcS"/>
                             <constraint firstAttribute="centerX" secondItem="TaR-pm-v7P" secondAttribute="centerX" id="7SN-xR-SH6"/>
                             <constraint firstItem="TaR-pm-v7P" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="D3c-Rb-TVo"/>
+                            <constraint firstItem="85q-29-xVx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="HcV-TS-UsF"/>
+                            <constraint firstItem="8we-Sn-Gte" firstAttribute="top" secondItem="85q-29-xVx" secondAttribute="bottom" id="IBq-45-eL3"/>
+                            <constraint firstAttribute="trailing" secondItem="85q-29-xVx" secondAttribute="trailing" id="RhF-DI-OmJ"/>
                             <constraint firstAttribute="trailing" secondItem="TaR-pm-v7P" secondAttribute="trailing" constant="20" id="Xdd-62-b4k"/>
+                            <constraint firstItem="85q-29-xVx" firstAttribute="top" secondItem="TaR-pm-v7P" secondAttribute="bottom" id="owe-JO-HoK"/>
                         </constraints>
                     </view>
                     <connections>

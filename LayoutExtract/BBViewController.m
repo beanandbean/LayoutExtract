@@ -21,12 +21,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIView *position = [(BBLayoutView *)self.view addPositionWithTag:1];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:position attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.segmentedControl attribute:NSLayoutAttributeBottom multiplier:1.0 constant:8.0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:position attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:position attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0.0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:position attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0.0]];
-    
     [self initializeLayoutViewForLayout:@"Layout18"];
     self.segmentedControl.selectedSegmentIndex = 0;
 }
