@@ -176,6 +176,16 @@ static NSDictionary *g_constraintRelations;
 
 - (void)setCornerRadiusDetected {
     NSString *tagString = self.nextPart;
+    BBLSDeviceOrientation orientation;
+    if ([tagString isEqualToString:@"@landscape"]) {
+        orientation = BBLSDeviceOrientationLandscape;
+        tagString = self.nextPart;
+    } else if ([tagString isEqualToString:@"@portrait"]) {
+        orientation = BBLSDeviceOrientationPortrait;
+        tagString = self.nextPart;
+    } else {
+        orientation = BBLSDeviceOrientationUniversal;
+    }
     NSInteger tag;
     if ([tagString isEqualToString:@"*"]) {
         tag = LS_ALL;
@@ -183,7 +193,7 @@ static NSDictionary *g_constraintRelations;
         tag = tagString.integerValue;
     }
     float value = self.nextPart.floatValue;
-    [self.delegate interpreter:self setCornerRadiusOfTag:tag value:value];
+    [self.delegate interpreter:self setCornerRadiusOfTag:tag value:value forOrientation:orientation];
 }
 
 @end

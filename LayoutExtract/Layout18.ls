@@ -1,1 +1,2 @@
-cornerRadius * 15
+cornerRadius @portrait * 15
+cornerRadius @landscape * 10

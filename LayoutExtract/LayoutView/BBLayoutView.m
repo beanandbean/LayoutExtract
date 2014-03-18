@@ -12,6 +12,11 @@
 #import "BBLayoutConstraintGeneratorSecond.h"
 #import "BBLayoutConstraintGeneratorBoth.h"
 
+#define CURRENT_ORIENTATION ([UIApplication sharedApplication].statusBarOrientation)
+#define SPECIFIED_ORIENTATION_RELATED_OBJ(orientation, landscape, portrait) (UIInterfaceOrientationIsLandscape(orientation) ? landscape : portrait)
+#define ORIENTATION_RELATED_OBJ(landscape, portrait) SPECIFIED_ORIENTATION_RELATED_OBJ(CURRENT_ORIENTATION, landscape, portrait)
+#define CURRENT_ORIENTATION_INDEX ORIENTATION_RELATED_OBJ(BBLSDeviceOrientationLandscape, BBLSDeviceOrientationPortrait)
+
 #define INTNUM(intnum) [NSNumber numberWithInteger:(NSInteger)intnum]
 #define FLOATNUM(floatnum) [NSNumber numberWithFloat:(float)floatnum]
 
@@ -281,13 +286,14 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
+    BBLSDeviceOrientation currentOrientationIndex = CURRENT_ORIENTATION_INDEX;
     for (NSNumber *tag in self.layoutCornerRadii) {
         if (tag.integerValue == LS_ALL) {
             for (UIView *view in self.layoutViews.allValues) {
-                view.layer.cornerRadius = ((NSNumber *)[self.layoutCornerRadii objectForKey:tag]).floatValue;
+                view.layer.cornerRadius = ((NSNumber *)[((NSArray *)[self.layoutCornerRadii objectForKey:tag]) objectAtIndex:currentOrientationIndex]).floatValue;
             }
         } else {
-            ((UIView *)[self.layoutViews objectForKey:tag]).layer.cornerRadius = ((NSNumber *)[self.layoutCornerRadii objectForKey:tag]).floatValue;
+            ((UIView *)[self.layoutViews objectForKey:tag]).layer.cornerRadius = ((NSNumber *)[((NSArray *)[self.layoutCornerRadii objectForKey:tag]) objectAtIndex:currentOrientationIndex]).floatValue;
         }
     }
 }
@@ -324,9 +330,21 @@
     [self addConstraint:constraint];
 }
 
-- (void)interpreter:(BBLSInterpreter *)interpreter setCornerRadiusOfTag:(NSInteger)tag value:(float)value {
+- (void)interpreter:(BBLSInterpreter *)interpreter setCornerRadiusOfTag:(NSInteger)tag value:(float)value forOrientation:(BBLSDeviceOrientation)orientation {
     if (tag == LS_ALL || [self.layoutViews.allKeys containsObject:INTNUM(tag)]) {
-        [self.layoutCornerRadii setObject:FLOATNUM(value) forKey:INTNUM(tag)];
+        NSMutableArray *pair;
+        if ([self.layoutCornerRadii.allKeys containsObject:INTNUM(tag)]) {
+            pair = [self.layoutCornerRadii objectForKey:INTNUM(tag)];
+        } else {
+            pair = [NSMutableArray arrayWithObjects:INTNUM(0), INTNUM(0), nil];
+        }
+        if (orientation == BBLSDeviceOrientationLandscape || orientation == BBLSDeviceOrientationUniversal) {
+            [pair replaceObjectAtIndex:BBLSDeviceOrientationLandscape withObject:FLOATNUM(value)];
+        }
+        if (orientation == BBLSDeviceOrientationPortrait || orientation == BBLSDeviceOrientationUniversal) {
+            [pair replaceObjectAtIndex:BBLSDeviceOrientationPortrait withObject:FLOATNUM(value)];
+        }
+        [self.layoutCornerRadii setObject:pair forKey:INTNUM(tag)];
     }
 }
 
