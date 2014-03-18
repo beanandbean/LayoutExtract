@@ -37,6 +37,27 @@
     return self;
 }
 
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.layoutViews = [NSMutableDictionary dictionary];
+        self.layoutConstraints = [NSMutableDictionary dictionary];
+        self.layoutCornerRadii = [NSMutableDictionary dictionary];
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        self.layoutViews = [NSMutableDictionary dictionary];
+        self.layoutConstraints = [NSMutableDictionary dictionary];
+        self.layoutCornerRadii = [NSMutableDictionary dictionary];
+        [self extractPositions];
+    }
+    return self;
+}
+
 - (id)initWithNibNamed:(NSString *)name atPosition:(BBLayoutDataPosition)position {
     NSString *documentPath;
     if (position == BBLayoutDataPositionDocument) {
@@ -79,10 +100,6 @@
     UINib *nibObj = [UINib nibWithData:nibData bundle:nil];
     self = [nibObj instantiateWithOwner:nil options:nil].firstObject;
     if (self) {
-        self.layoutViews = [NSMutableDictionary dictionary];
-        self.layoutConstraints = [NSMutableDictionary dictionary];
-        self.layoutCornerRadii = [NSMutableDictionary dictionary];
-        [self extractPositions];
         if (lsData) {
             NSString *script = [[NSString alloc] initWithData:lsData encoding:NSUTF8StringEncoding];
             [[[BBLSInterpreter alloc] initWithDelegate:self] feed:script];

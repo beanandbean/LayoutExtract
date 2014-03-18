@@ -12,7 +12,7 @@
                         <viewControllerLayoutGuide type="top" id="Vh3-4a-vxH"/>
                         <viewControllerLayoutGuide type="bottom" id="8we-Sn-Gte"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="BBLayoutView">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>

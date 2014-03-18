@@ -21,6 +21,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    UIView *position = [(BBLayoutView *)self.view addPositionWithTag:1];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:position attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.segmentedControl attribute:NSLayoutAttributeBottom multiplier:1.0 constant:8.0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:position attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:position attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0.0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:position attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0.0]];
+    
     [self initializeLayoutViewForLayout:@"Layout18"];
     self.segmentedControl.selectedSegmentIndex = 0;
 }
@@ -52,12 +58,7 @@
         [self.layoutView feedLayoutScript:@"$(*).cornerRadius = 5"];
     }
     self.layoutView.dataSource = self;
-    self.layoutView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.view addSubview:self.layoutView];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.layoutView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.segmentedControl attribute:NSLayoutAttributeBottom multiplier:1.0 constant:8.0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.layoutView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.layoutView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0.0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.layoutView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0.0]];
+    [(BBLayoutView *)self.view replacePositionTagged:1 withView:self.layoutView];
    
     [self.layoutView reloadData];
 }
@@ -73,7 +74,6 @@
 }
 
 - (IBAction)segmentedControlValueChanged:(id)sender {
-    [self.layoutView removeFromSuperview];
     NSString *nib;
     switch (self.segmentedControl.selectedSegmentIndex) {
         case 0:
