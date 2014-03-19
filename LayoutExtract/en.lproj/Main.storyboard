@@ -28,11 +28,12 @@
                                     <constraint firstAttribute="height" constant="28" id="XDB-Fh-CSR"/>
                                 </constraints>
                                 <segments>
-                                    <segment title="1 * 8"/>
-                                    <segment title="2 * 4"/>
-                                    <segment title="3 * 3"/>
+                                    <segment title="1*8"/>
+                                    <segment title="2*4"/>
+                                    <segment title="3*3"/>
                                     <segment title="Code"/>
                                     <segment title="LS"/>
+                                    <segment title="Ball"/>
                                 </segments>
                                 <connections>
                                     <action selector="segmentedControlValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="sys-bd-JQ1"/>

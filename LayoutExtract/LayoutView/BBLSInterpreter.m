@@ -132,6 +132,16 @@ static NSDictionary *g_constraintRelations;
 
 - (void)addConstraintDetected {
     NSString *tagString1 = self.nextPart;
+    BBLSDeviceOrientation orientation;
+    if ([tagString1 isEqualToString:@"@landscape"]) {
+        orientation = BBLSDeviceOrientationLandscape;
+        tagString1 = self.nextPart;
+    } else if ([tagString1 isEqualToString:@"@portrait"]) {
+        orientation = BBLSDeviceOrientationPortrait;
+        tagString1 = self.nextPart;
+    } else {
+        orientation = BBLSDeviceOrientationUniversal;
+    }
     UILayoutPriority priority;
     if ([tagString1 isEqualToString:@"@p"]) {
         priority = self.nextPart.floatValue;
@@ -171,7 +181,7 @@ static NSDictionary *g_constraintRelations;
     }
     float mul = self.nextPart.floatValue;
     float cons = self.nextPart.floatValue;
-    [self.delegate interpreter:self addConstraintWithTag:tag1 attribute:attr1 relatedBy:relation toTag:tag2 attribute:attr2 multiplier:mul constant:cons priority:priority];
+    [self.delegate interpreter:self addConstraintWithTag:tag1 attribute:attr1 relatedBy:relation toTag:tag2 attribute:attr2 multiplier:mul constant:cons priority:priority forOrientation:orientation];
 }
 
 - (void)setCornerRadiusDetected {

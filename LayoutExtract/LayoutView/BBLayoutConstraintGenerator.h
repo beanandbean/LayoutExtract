@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Bean & Bean. All rights reserved.
 //
 
+#import "BBLSInterpreter.h"
+
 @interface BBLayoutConstraintGenerator : NSObject
 
 @property (strong, nonatomic) NSLayoutConstraint *generatedConstraint;
@@ -20,9 +22,9 @@
 @property (nonatomic) CGFloat mul;
 @property (nonatomic) CGFloat cons;
 @property (nonatomic) UILayoutPriority priority;
+@property (nonatomic) BBLSDeviceOrientation orientation;
 
-
-- (id)initWithPositionDictionary:(NSDictionary *)positionDictionary andConstraint:(NSLayoutConstraint *)constraint;
+- (id)initWithPositionDictionary:(NSDictionary *)positionDictionary constraint:(NSLayoutConstraint *)constraint andOrientation:(BBLSDeviceOrientation)orientation;
 
 - (NSLayoutConstraint *)generated;
 - (NSLayoutConstraint *)destroyed;

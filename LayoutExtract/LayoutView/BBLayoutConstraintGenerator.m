@@ -10,7 +10,7 @@
 
 @implementation BBLayoutConstraintGenerator
 
-- (id)initWithPositionDictionary:(NSDictionary *)positionDictionary andConstraint:(NSLayoutConstraint *)constraint {
+- (id)initWithPositionDictionary:(NSDictionary *)positionDictionary constraint:(NSLayoutConstraint *)constraint andOrientation:(BBLSDeviceOrientation)orientation {
     self = [super init];
     if (self) {
         self.positionDictionary = positionDictionary;
@@ -23,6 +23,7 @@
         self.mul = constraint.multiplier;
         self.cons = constraint.constant;
         self.priority = constraint.priority;
+        self.orientation = orientation;
     }
     return self;
 }

@@ -28,6 +28,11 @@
 @property (strong, nonatomic) NSMutableDictionary *layoutConstraints;
 @property (strong, nonatomic) NSMutableDictionary *layoutCornerRadii;
 
+@property (strong, nonatomic) NSMutableArray *landscapeConstraints;
+@property (strong, nonatomic) NSMutableArray *portraitConstraints;
+
+@property (nonatomic) BBLSDeviceOrientation previousOrientation;
+
 @end
 
 @implementation BBLayoutView
@@ -38,6 +43,9 @@
         self.layoutViews = [NSMutableDictionary dictionary];
         self.layoutConstraints = [NSMutableDictionary dictionary];
         self.layoutCornerRadii = [NSMutableDictionary dictionary];
+        self.landscapeConstraints = [NSMutableArray array];
+        self.portraitConstraints = [NSMutableArray array];
+        self.previousOrientation = CURRENT_ORIENTATION_INDEX;
     }
     return self;
 }
@@ -48,6 +56,9 @@
         self.layoutViews = [NSMutableDictionary dictionary];
         self.layoutConstraints = [NSMutableDictionary dictionary];
         self.layoutCornerRadii = [NSMutableDictionary dictionary];
+        self.landscapeConstraints = [NSMutableArray array];
+        self.portraitConstraints = [NSMutableArray array];
+        self.previousOrientation = CURRENT_ORIENTATION_INDEX;
     }
     return self;
 }
@@ -58,6 +69,9 @@
         self.layoutViews = [NSMutableDictionary dictionary];
         self.layoutConstraints = [NSMutableDictionary dictionary];
         self.layoutCornerRadii = [NSMutableDictionary dictionary];
+        self.landscapeConstraints = [NSMutableArray array];
+        self.portraitConstraints = [NSMutableArray array];
+        self.previousOrientation = CURRENT_ORIENTATION_INDEX;
         [self extractPositions];
     }
     return self;
@@ -157,14 +171,16 @@
     for (NSLayoutConstraint *constraint in self.constraints) {
         NSArray *layoutPos = self.layoutViews.allValues;
         if ([layoutPos containsObject:constraint.firstItem] && [layoutPos containsObject:constraint.secondItem]) {
-            BBLayoutConstraintGeneratorBoth *generator = [[BBLayoutConstraintGeneratorBoth alloc] initWithPositionDictionary:self.layoutViews andConstraint:constraint];
+            BBLayoutConstraintGeneratorBoth *generator = [[BBLayoutConstraintGeneratorBoth alloc] initWithPositionDictionary:self.layoutViews constraint:constraint andOrientation:BBLSDeviceOrientationUniversal];
             [((NSMutableArray *)[self.layoutConstraints objectForKey:TAG(constraint.firstItem)]) addObject:generator];
-            [((NSMutableArray *)[self.layoutConstraints objectForKey:TAG(constraint.secondItem)]) addObject:generator];
+            if (constraint.secondItem != constraint.firstItem) {
+                [((NSMutableArray *)[self.layoutConstraints objectForKey:TAG(constraint.secondItem)]) addObject:generator];
+            }
         } else if ([layoutPos containsObject:constraint.firstItem]) {
-            BBLayoutConstraintGeneratorFirst *generator = [[BBLayoutConstraintGeneratorFirst alloc] initWithPositionDictionary:self.layoutViews andConstraint:constraint];
+            BBLayoutConstraintGeneratorFirst *generator = [[BBLayoutConstraintGeneratorFirst alloc] initWithPositionDictionary:self.layoutViews constraint:constraint andOrientation:BBLSDeviceOrientationUniversal];
             [((NSMutableArray *)[self.layoutConstraints objectForKey:TAG(constraint.firstItem)]) addObject:generator];
         } else if ([layoutPos containsObject:constraint.secondItem]) {
-            BBLayoutConstraintGeneratorSecond *generator = [[BBLayoutConstraintGeneratorSecond alloc] initWithPositionDictionary:self.layoutViews andConstraint:constraint];
+            BBLayoutConstraintGeneratorSecond *generator = [[BBLayoutConstraintGeneratorSecond alloc] initWithPositionDictionary:self.layoutViews constraint:constraint andOrientation:BBLSDeviceOrientationUniversal];
             [((NSMutableArray *)[self.layoutConstraints objectForKey:TAG(constraint.secondItem)]) addObject:generator];
         }
     }
@@ -175,9 +191,14 @@
         if (self.dataSource) {
             for (NSNumber *tag in self.layoutConstraints) {
                 for (BBLayoutConstraintGenerator *generator in [self.layoutConstraints objectForKey:tag]) {
-                    NSLayoutConstraint *destroyed = generator.destroyed;
-                    if ([self.constraints containsObject:destroyed]) {
-                        [super removeConstraint:destroyed];
+                    NSLayoutConstraint *constraint = generator.destroyed;
+                    if ((generator.orientation == BBLSDeviceOrientationUniversal || generator.orientation == CURRENT_ORIENTATION_INDEX) && [self.constraints containsObject:constraint]) {
+                        [super removeConstraint:constraint];
+                    }
+                    if (generator.orientation == BBLSDeviceOrientationLandscape && [self.landscapeConstraints containsObject:constraint]) {
+                        [self.landscapeConstraints removeObject:constraint];
+                    } else if (generator.orientation == BBLSDeviceOrientationPortrait && [self.portraitConstraints containsObject:constraint]) {
+                        [self.portraitConstraints removeObject:constraint];
                     }
                 }
             }
@@ -195,9 +216,14 @@
             }
             for (NSNumber *tag in self.layoutConstraints) {
                 for (BBLayoutConstraintGenerator *generator in [self.layoutConstraints objectForKey:tag]) {
-                    NSLayoutConstraint *generated = generator.generated;
-                    if (![self.constraints containsObject:generated]) {
-                        [super addConstraint:generated];
+                    NSLayoutConstraint *constraint = generator.generated;
+                    if ((generator.orientation == BBLSDeviceOrientationUniversal || generator.orientation == CURRENT_ORIENTATION_INDEX) && ![self.constraints containsObject:constraint]) {
+                        [super addConstraint:constraint];
+                    }
+                    if (generator.orientation == BBLSDeviceOrientationLandscape && ![self.landscapeConstraints containsObject:constraint]) {
+                        [self.landscapeConstraints addObject:constraint];
+                    } else if (generator.orientation == BBLSDeviceOrientationPortrait && ![self.portraitConstraints containsObject:constraint]) {
+                        [self.portraitConstraints addObject:constraint];
                     }
                 }
             }
@@ -208,7 +234,15 @@
 - (void)replacePositionTagged:(NSInteger)tag withView:(UIView *)view {
     if (self.layoutViews) {
         for (BBLayoutConstraintGenerator *generator in [self.layoutConstraints objectForKey:INTNUM(tag)]) {
-            [super removeConstraint:generator.destroyed];
+            NSLayoutConstraint *constraint = generator.destroyed;
+            if ((generator.orientation == BBLSDeviceOrientationUniversal || generator.orientation == CURRENT_ORIENTATION_INDEX) && [self.constraints containsObject:constraint]) {
+                [super removeConstraint:constraint];
+            }
+            if (generator.orientation == BBLSDeviceOrientationLandscape && [self.landscapeConstraints containsObject:constraint]) {
+                [self.landscapeConstraints removeObject:constraint];
+            } else if (generator.orientation == BBLSDeviceOrientationPortrait && [self.portraitConstraints containsObject:constraint]) {
+                [self.portraitConstraints removeObject:constraint];
+            }
         }
         if (!view) {
             view = [[BBLayoutPosition alloc] init];
@@ -220,7 +254,15 @@
         [self insertSubview:view aboveSubview:old];
         [old removeFromSuperview];
         for (BBLayoutConstraintGenerator *generator in [self.layoutConstraints objectForKey:INTNUM(tag)]) {
-            [super addConstraint:generator.generated];
+            NSLayoutConstraint *constraint = generator.generated;
+            if ((generator.orientation == BBLSDeviceOrientationUniversal || generator.orientation == CURRENT_ORIENTATION_INDEX) && ![self.constraints containsObject:constraint]) {
+                [super addConstraint:constraint];
+            }
+            if (generator.orientation == BBLSDeviceOrientationLandscape && ![self.landscapeConstraints containsObject:constraint]) {
+                [self.landscapeConstraints addObject:constraint];
+            } else if (generator.orientation == BBLSDeviceOrientationPortrait && ![self.portraitConstraints containsObject:constraint]) {
+                [self.portraitConstraints addObject:constraint];
+            }
         }
     }
 }
@@ -242,17 +284,34 @@
 }
 
 - (void)addConstraint:(NSLayoutConstraint *)constraint {
-    [super addConstraint:constraint];
+    if (self.layoutViews) {
+        [self addConstraint:constraint forOrientation:BBLSDeviceOrientationUniversal];
+    } else {
+        [super addConstraint:constraint];
+    }
+}
+
+- (void)addConstraint:(NSLayoutConstraint *)constraint forOrientation:(BBLSDeviceOrientation)orientation {
+    if ((orientation == BBLSDeviceOrientationUniversal || orientation == CURRENT_ORIENTATION_INDEX) && ![self.constraints containsObject:constraint]) {
+        [super addConstraint:constraint];
+    }
+    if (orientation == BBLSDeviceOrientationLandscape && ![self.landscapeConstraints containsObject:constraint]) {
+        [self.landscapeConstraints addObject:constraint];
+    } else if (orientation == BBLSDeviceOrientationPortrait && ![self.portraitConstraints containsObject:constraint]) {
+        [self.portraitConstraints addObject:constraint];
+    }
     NSArray *layoutPos = self.layoutViews.allValues;
     if ([layoutPos containsObject:constraint.firstItem] && [layoutPos containsObject:constraint.secondItem]) {
-        BBLayoutConstraintGeneratorBoth *generator = [[BBLayoutConstraintGeneratorBoth alloc] initWithPositionDictionary:self.layoutViews andConstraint:constraint];
+        BBLayoutConstraintGeneratorBoth *generator = [[BBLayoutConstraintGeneratorBoth alloc] initWithPositionDictionary:self.layoutViews constraint:constraint andOrientation:orientation];
         [((NSMutableArray *)[self.layoutConstraints objectForKey:TAG(constraint.firstItem)]) addObject:generator];
-        [((NSMutableArray *)[self.layoutConstraints objectForKey:TAG(constraint.secondItem)]) addObject:generator];
+        if (constraint.secondItem != constraint.firstItem) {
+            [((NSMutableArray *)[self.layoutConstraints objectForKey:TAG(constraint.secondItem)]) addObject:generator];
+        }
     } else if ([layoutPos containsObject:constraint.firstItem]) {
-        BBLayoutConstraintGeneratorFirst *generator = [[BBLayoutConstraintGeneratorFirst alloc] initWithPositionDictionary:self.layoutViews andConstraint:constraint];
+        BBLayoutConstraintGeneratorFirst *generator = [[BBLayoutConstraintGeneratorFirst alloc] initWithPositionDictionary:self.layoutViews constraint:constraint andOrientation:orientation];
         [((NSMutableArray *)[self.layoutConstraints objectForKey:TAG(constraint.firstItem)]) addObject:generator];
     } else if ([layoutPos containsObject:constraint.secondItem]) {
-        BBLayoutConstraintGeneratorSecond *generator = [[BBLayoutConstraintGeneratorSecond alloc] initWithPositionDictionary:self.layoutViews andConstraint:constraint];
+        BBLayoutConstraintGeneratorSecond *generator = [[BBLayoutConstraintGeneratorSecond alloc] initWithPositionDictionary:self.layoutViews constraint:constraint andOrientation:orientation];
         [((NSMutableArray *)[self.layoutConstraints objectForKey:TAG(constraint.secondItem)]) addObject:generator];
     }
 }
@@ -265,6 +324,12 @@
 
 - (void)removeConstraint:(NSLayoutConstraint *)constraint {
     [super removeConstraint:constraint];
+    if ([self.landscapeConstraints containsObject:constraint]) {
+        [self.landscapeConstraints removeObject:constraint];
+    }
+    if ([self.portraitConstraints containsObject:constraint]) {
+        [self.portraitConstraints removeObject:constraint];
+    }
     for (NSMutableArray *constraints in self.layoutConstraints.allValues) {
         for (BBLayoutConstraintGenerator *generator in constraints.copy) {
             if (generator.generatedConstraint == constraint) {
@@ -285,15 +350,57 @@
 }
 
 - (void)layoutSubviews {
+    if (self.previousOrientation != CURRENT_ORIENTATION_INDEX) {
+        [self deviceOrientationChanged];
+        self.previousOrientation = CURRENT_ORIENTATION_INDEX;
+    }
     [super layoutSubviews];
     BBLSDeviceOrientation currentOrientationIndex = CURRENT_ORIENTATION_INDEX;
     for (NSNumber *tag in self.layoutCornerRadii) {
         if (tag.integerValue == LS_ALL) {
             for (UIView *view in self.layoutViews.allValues) {
                 view.layer.cornerRadius = ((NSNumber *)[((NSArray *)[self.layoutCornerRadii objectForKey:tag]) objectAtIndex:currentOrientationIndex]).floatValue;
+                //view.layer.shadowColor = [UIColor blackColor].CGColor;
+                //view.layer.shadowOffset = CGSizeMake(0, 0);
+                //view.layer.shadowOpacity = 1.0;
+                //view.layer.shadowRadius = 10.0;
             }
         } else {
             ((UIView *)[self.layoutViews objectForKey:tag]).layer.cornerRadius = ((NSNumber *)[((NSArray *)[self.layoutCornerRadii objectForKey:tag]) objectAtIndex:currentOrientationIndex]).floatValue;
+        }
+    }
+}
+
+- (void)deviceOrientationChanged {
+    if (CURRENT_ORIENTATION_INDEX == BBLSDeviceOrientationLandscape) {
+        if (self.portraitConstraints) {
+            for (NSLayoutConstraint *constraint in self.portraitConstraints) {
+                if ([self.constraints containsObject:constraint]) {
+                    [super removeConstraint:constraint];
+                }
+            }
+        }
+        if (self.landscapeConstraints) {
+            for (NSLayoutConstraint *constraint in self.landscapeConstraints) {
+                if (![self.constraints containsObject:constraint]) {
+                    [super addConstraint:constraint];
+                }
+            }
+        }
+    } else {
+        if (self.landscapeConstraints) {
+            for (NSLayoutConstraint *constraint in self.landscapeConstraints) {
+                if ([self.constraints containsObject:constraint]) {
+                    [super removeConstraint:constraint];
+                }
+            }
+        }
+        if (self.portraitConstraints) {
+            for (NSLayoutConstraint *constraint in self.portraitConstraints) {
+                if (![self.constraints containsObject:constraint]) {
+                    [super addConstraint:constraint];
+                }
+            }
         }
     }
 }
@@ -304,7 +411,7 @@
     [self addPositionWithTag:tag];
 }
 
-- (void)interpreter:(BBLSInterpreter *)interpreter addConstraintWithTag:(NSInteger)tag1 attribute:(NSLayoutAttribute)attr1 relatedBy:(NSLayoutRelation)relation toTag:(NSInteger)tag2 attribute:(NSLayoutAttribute)attr2 multiplier:(float)mul constant:(float)cons priority:(UILayoutPriority)priority {
+- (void)interpreter:(BBLSInterpreter *)interpreter addConstraintWithTag:(NSInteger)tag1 attribute:(NSLayoutAttribute)attr1 relatedBy:(NSLayoutRelation)relation toTag:(NSInteger)tag2 attribute:(NSLayoutAttribute)attr2 multiplier:(float)mul constant:(float)cons priority:(UILayoutPriority)priority forOrientation:(BBLSDeviceOrientation)orientation {
     UIView *view1;
     if (tag1 == LS_PARENT) {
         view1 = self;
@@ -327,7 +434,7 @@
     }
     NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:view1 attribute:attr1 relatedBy:relation toItem:view2 attribute:attr2 multiplier:mul constant:cons];
     constraint.priority = priority;
-    [self addConstraint:constraint];
+    [self addConstraint:constraint forOrientation:orientation];
 }
 
 - (void)interpreter:(BBLSInterpreter *)interpreter setCornerRadiusOfTag:(NSInteger)tag value:(float)value forOrientation:(BBLSDeviceOrientation)orientation {

@@ -17,8 +17,8 @@
 
 @implementation BBLayoutConstraintGeneratorBoth
 
-- (id)initWithPositionDictionary:(NSDictionary *)positionDictionary andConstraint:(NSLayoutConstraint *)constraint {
-    self = [super initWithPositionDictionary:positionDictionary andConstraint:constraint];
+- (id)initWithPositionDictionary:(NSDictionary *)positionDictionary constraint:(NSLayoutConstraint *)constraint andOrientation:(BBLSDeviceOrientation)orientation {
+    self = [super initWithPositionDictionary:positionDictionary constraint:constraint andOrientation:orientation];
     if (self) {
         self.tag1 = [NSNumber numberWithInteger:((UIView *)constraint.firstItem).tag];
         self.tag2 = [NSNumber numberWithInteger:((UIView *)constraint.secondItem).tag];

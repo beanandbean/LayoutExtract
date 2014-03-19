@@ -33,6 +33,8 @@
 		2C86A10418D45BCE00572ABA /* BBLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C86A0FC18D45BCE00572ABA /* BBLayoutView.m */; };
 		2C86A10518D45BCE00572ABA /* BBLSInterpreter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C86A0FE18D45BCE00572ABA /* BBLSInterpreter.m */; };
 		2CBC855F18D449E400199782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CBC855D18D449E400199782 /* Main.storyboard */; };
+		2CDDFF9F18D868F4004B44B6 /* LayoutBall@iphone.ls in Resources */ = {isa = PBXBuildFile; fileRef = 2CDDFF9E18D868F4004B44B6 /* LayoutBall@iphone.ls */; };
+		2CDDFFA118D86900004B44B6 /* LayoutBall@ipad.ls in Resources */ = {isa = PBXBuildFile; fileRef = 2CDDFFA018D86900004B44B6 /* LayoutBall@ipad.ls */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +85,8 @@
 		2C86A0FD18D45BCE00572ABA /* BBLSInterpreter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BBLSInterpreter.h; path = LayoutView/BBLSInterpreter.h; sourceTree = "<group>"; };
 		2C86A0FE18D45BCE00572ABA /* BBLSInterpreter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BBLSInterpreter.m; path = LayoutView/BBLSInterpreter.m; sourceTree = "<group>"; };
 		2CBC855E18D449E400199782 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = LayoutExtract/en.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2CDDFF9E18D868F4004B44B6 /* LayoutBall@iphone.ls */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "LayoutBall@iphone.ls"; sourceTree = "<group>"; };
+		2CDDFFA018D86900004B44B6 /* LayoutBall@ipad.ls */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "LayoutBall@ipad.ls"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +179,8 @@
 				2C65ACED18D33F400082BF61 /* Layout24.ls */,
 				2C65ACEF18D33F630082BF61 /* Layout33.ls */,
 				2C2EF5D818D8208F0076DB77 /* LayoutLS.ls */,
+				2CDDFF9E18D868F4004B44B6 /* LayoutBall@iphone.ls */,
+				2CDDFFA018D86900004B44B6 /* LayoutBall@ipad.ls */,
 			);
 			name = Layouts;
 			sourceTree = "<group>";
@@ -245,7 +251,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = BB;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Bean & Bean";
 				TargetAttributes = {
 					2C5BC90C18CF15B700712C80 = {
@@ -281,11 +287,13 @@
 				2C65ACEC18D32C990082BF61 /* Layout18.ls in Resources */,
 				2C5BC94518CF496E00712C80 /* Layout33.xib in Resources */,
 				2C5BC92818CF172400712C80 /* Layout24.xib in Resources */,
+				2CDDFF9F18D868F4004B44B6 /* LayoutBall@iphone.ls in Resources */,
 				2C65ACEE18D33F400082BF61 /* Layout24.ls in Resources */,
 				2C2EF5D918D8208F0076DB77 /* LayoutLS.ls in Resources */,
 				2C5BC90818CF15B700712C80 /* Images.xcassets in Resources */,
 				2CBC855F18D449E400199782 /* Main.storyboard in Resources */,
 				2C5BC93D18CF488B00712C80 /* Layout18.xib in Resources */,
+				2CDDFFA118D86900004B44B6 /* LayoutBall@ipad.ls in Resources */,
 				2C5BC8F718CF15B700712C80 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -359,7 +367,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -399,7 +406,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -458,7 +464,6 @@
 		2C5BC92218CF15B700712C80 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LayoutExtract.app/LayoutExtract";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -481,7 +486,6 @@
 		2C5BC92318CF15B700712C80 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LayoutExtract.app/LayoutExtract";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",

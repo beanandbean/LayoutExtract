@@ -27,7 +27,7 @@
 
 - (void)initializeLayoutViewForLayout:(NSString *)layout {
     if (layout) {
-        if ([layout isEqualToString:@"LayoutLS"]) {
+        if ([layout isEqualToString:@"LayoutLS"] || [layout isEqualToString:@"LayoutBall"]) {
             self.layoutView = [[BBLayoutView alloc] initWithLSNamed:layout atPosition:BBLayoutDataPositionBundle];
         } else {
             self.layoutView = [[BBLayoutView alloc] initWithNibNamed:layout atPosition:BBLayoutDataPositionBundle];
@@ -58,6 +58,7 @@
 }
 
 - (void)didReceiveMemoryWarning {
+    NSLog(@"%@", [NSValue valueWithCGSize:self.layoutView.frame.size]);
     [super didReceiveMemoryWarning];
 }
 
@@ -84,6 +85,10 @@
             
         case 4:
             nib = @"LayoutLS";
+            break;
+            
+        case 5:
+            nib = @"LayoutBall";
             break;
             
         default:
