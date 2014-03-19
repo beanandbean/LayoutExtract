@@ -75,3 +75,4 @@ constraint @portrait 7 centerY = p centerY 1 -54
 
 cornerRadius @landscape * 32
 cornerRadius @portrait * 38
+shadow * 0 0 10 background 1

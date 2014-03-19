@@ -12,6 +12,8 @@
 #import "BBLayoutConstraintGeneratorSecond.h"
 #import "BBLayoutConstraintGeneratorBoth.h"
 
+#import "BBShadow.h"
+
 #define CURRENT_ORIENTATION ([UIApplication sharedApplication].statusBarOrientation)
 #define SPECIFIED_ORIENTATION_RELATED_OBJ(orientation, landscape, portrait) (UIInterfaceOrientationIsLandscape(orientation) ? landscape : portrait)
 #define ORIENTATION_RELATED_OBJ(landscape, portrait) SPECIFIED_ORIENTATION_RELATED_OBJ(CURRENT_ORIENTATION, landscape, portrait)
@@ -27,6 +29,7 @@
 @property (strong, nonatomic) NSMutableDictionary *layoutViews;
 @property (strong, nonatomic) NSMutableDictionary *layoutConstraints;
 @property (strong, nonatomic) NSMutableDictionary *layoutCornerRadii;
+@property (strong, nonatomic) NSMutableDictionary *layoutShadows;
 
 @property (strong, nonatomic) NSMutableArray *landscapeConstraints;
 @property (strong, nonatomic) NSMutableArray *portraitConstraints;
@@ -37,15 +40,20 @@
 
 @implementation BBLayoutView
 
+- (void)initializeLayoutContainers {
+    self.layoutViews = [NSMutableDictionary dictionary];
+    self.layoutConstraints = [NSMutableDictionary dictionary];
+    self.layoutCornerRadii = [NSMutableDictionary dictionary];
+    self.layoutShadows = [NSMutableDictionary dictionary];
+    self.landscapeConstraints = [NSMutableArray array];
+    self.portraitConstraints = [NSMutableArray array];
+    self.previousOrientation = CURRENT_ORIENTATION_INDEX;
+}
+
 - (id)init {
     self = [super init];
     if (self) {
-        self.layoutViews = [NSMutableDictionary dictionary];
-        self.layoutConstraints = [NSMutableDictionary dictionary];
-        self.layoutCornerRadii = [NSMutableDictionary dictionary];
-        self.landscapeConstraints = [NSMutableArray array];
-        self.portraitConstraints = [NSMutableArray array];
-        self.previousOrientation = CURRENT_ORIENTATION_INDEX;
+        [self initializeLayoutContainers];
     }
     return self;
 }
@@ -53,12 +61,7 @@
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.layoutViews = [NSMutableDictionary dictionary];
-        self.layoutConstraints = [NSMutableDictionary dictionary];
-        self.layoutCornerRadii = [NSMutableDictionary dictionary];
-        self.landscapeConstraints = [NSMutableArray array];
-        self.portraitConstraints = [NSMutableArray array];
-        self.previousOrientation = CURRENT_ORIENTATION_INDEX;
+        [self initializeLayoutContainers];
     }
     return self;
 }
@@ -66,12 +69,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        self.layoutViews = [NSMutableDictionary dictionary];
-        self.layoutConstraints = [NSMutableDictionary dictionary];
-        self.layoutCornerRadii = [NSMutableDictionary dictionary];
-        self.landscapeConstraints = [NSMutableArray array];
-        self.portraitConstraints = [NSMutableArray array];
-        self.previousOrientation = CURRENT_ORIENTATION_INDEX;
+        [self initializeLayoutContainers];
         [self extractPositions];
     }
     return self;
@@ -360,13 +358,35 @@
         if (tag.integerValue == LS_ALL) {
             for (UIView *view in self.layoutViews.allValues) {
                 view.layer.cornerRadius = ((NSNumber *)[((NSArray *)[self.layoutCornerRadii objectForKey:tag]) objectAtIndex:currentOrientationIndex]).floatValue;
-                //view.layer.shadowColor = [UIColor blackColor].CGColor;
-                //view.layer.shadowOffset = CGSizeMake(0, 0);
-                //view.layer.shadowOpacity = 1.0;
-                //view.layer.shadowRadius = 10.0;
             }
         } else {
             ((UIView *)[self.layoutViews objectForKey:tag]).layer.cornerRadius = ((NSNumber *)[((NSArray *)[self.layoutCornerRadii objectForKey:tag]) objectAtIndex:currentOrientationIndex]).floatValue;
+        }
+    }
+    for (NSNumber *tag in self.layoutShadows) {
+        if (tag.integerValue == LS_ALL) {
+            for (UIView *view in self.layoutViews.allValues) {
+                BBShadow *shadow = [((NSArray *)[self.layoutShadows objectForKey:tag]) objectAtIndex:currentOrientationIndex];
+                if (shadow.color) {
+                    view.layer.shadowColor = shadow.color.CGColor;
+                } else {
+                    view.layer.shadowColor = view.backgroundColor.CGColor;
+                }
+                view.layer.shadowOffset = shadow.offset;
+                view.layer.shadowOpacity = shadow.opacity;
+                view.layer.shadowRadius = shadow.radius;
+            }
+        } else {
+            UIView *view = [self.layoutViews objectForKey:tag];
+            BBShadow *shadow = [((NSArray *)[self.layoutShadows objectForKey:tag]) objectAtIndex:currentOrientationIndex];
+            if (shadow.color) {
+                view.layer.shadowColor = shadow.color.CGColor;
+            } else {
+                view.layer.shadowColor = view.backgroundColor.CGColor;
+            }
+            view.layer.shadowOffset = shadow.offset;
+            view.layer.shadowOpacity = shadow.opacity;
+            view.layer.shadowRadius = shadow.radius;
         }
     }
 }
@@ -452,6 +472,25 @@
             [pair replaceObjectAtIndex:BBLSDeviceOrientationPortrait withObject:FLOATNUM(value)];
         }
         [self.layoutCornerRadii setObject:pair forKey:INTNUM(tag)];
+    }
+}
+
+- (void)interpreter:(BBLSInterpreter *)interpreter setShadowOfTag:(NSInteger)tag offset:(CGSize)offset radius:(float)radius color:(UIColor *)color opacity:(float)opacity forOrientation:(BBLSDeviceOrientation)orientation {
+    BBShadow *shadow = [[BBShadow alloc] initWithOffset:offset radius:radius color:color andOpacity:opacity];
+    if (tag == LS_ALL || [self.layoutViews.allKeys containsObject:INTNUM(tag)]) {
+        NSMutableArray *pair;
+        if ([self.layoutShadows.allKeys containsObject:INTNUM(tag)]) {
+            pair = [self.layoutShadows objectForKey:INTNUM(tag)];
+        } else {
+            pair = [NSMutableArray arrayWithObjects:INTNUM(0), INTNUM(0), nil];
+        }
+        if (orientation == BBLSDeviceOrientationLandscape || orientation == BBLSDeviceOrientationUniversal) {
+            [pair replaceObjectAtIndex:BBLSDeviceOrientationLandscape withObject:shadow];
+        }
+        if (orientation == BBLSDeviceOrientationPortrait || orientation == BBLSDeviceOrientationUniversal) {
+            [pair replaceObjectAtIndex:BBLSDeviceOrientationPortrait withObject:shadow];
+        }
+        [self.layoutShadows setObject:pair forKey:INTNUM(tag)];
     }
 }
 

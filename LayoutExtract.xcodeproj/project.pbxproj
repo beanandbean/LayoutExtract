@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2C2EF5D918D8208F0076DB77 /* LayoutLS.ls in Resources */ = {isa = PBXBuildFile; fileRef = 2C2EF5D818D8208F0076DB77 /* LayoutLS.ls */; };
+		2C35F9F118D9AE6A00E1E5CC /* BBShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C35F9F018D9AE6A00E1E5CC /* BBShadow.m */; };
 		2C5BC8ED18CF15B700712C80 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5BC8EC18CF15B700712C80 /* Foundation.framework */; };
 		2C5BC8EF18CF15B700712C80 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5BC8EE18CF15B700712C80 /* CoreGraphics.framework */; };
 		2C5BC8F118CF15B700712C80 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5BC8F018CF15B700712C80 /* UIKit.framework */; };
@@ -49,6 +50,8 @@
 
 /* Begin PBXFileReference section */
 		2C2EF5D818D8208F0076DB77 /* LayoutLS.ls */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LayoutLS.ls; sourceTree = "<group>"; };
+		2C35F9EF18D9AE6A00E1E5CC /* BBShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BBShadow.h; path = LayoutView/BBShadow.h; sourceTree = "<group>"; };
+		2C35F9F018D9AE6A00E1E5CC /* BBShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BBShadow.m; path = LayoutView/BBShadow.m; sourceTree = "<group>"; };
 		2C5BC8E918CF15B700712C80 /* LayoutExtract.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LayoutExtract.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5BC8EC18CF15B700712C80 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2C5BC8EE18CF15B700712C80 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -202,6 +205,8 @@
 				2C86A0FC18D45BCE00572ABA /* BBLayoutView.m */,
 				2C86A0FD18D45BCE00572ABA /* BBLSInterpreter.h */,
 				2C86A0FE18D45BCE00572ABA /* BBLSInterpreter.m */,
+				2C35F9EF18D9AE6A00E1E5CC /* BBShadow.h */,
+				2C35F9F018D9AE6A00E1E5CC /* BBShadow.m */,
 			);
 			name = "Layout View";
 			sourceTree = "<group>";
@@ -318,6 +323,7 @@
 				2C86A10218D45BCE00572ABA /* BBLayoutConstraintGeneratorSecond.m in Sources */,
 				2C5BC8FD18CF15B700712C80 /* BBAppDelegate.m in Sources */,
 				2C86A10418D45BCE00572ABA /* BBLayoutView.m in Sources */,
+				2C35F9F118D9AE6A00E1E5CC /* BBShadow.m in Sources */,
 				2C86A10318D45BCE00572ABA /* BBLayoutPosition.m in Sources */,
 				2C86A0FF18D45BCE00572ABA /* BBLayoutConstraintGenerator.m in Sources */,
 				2C5BC8F918CF15B700712C80 /* main.m in Sources */,
